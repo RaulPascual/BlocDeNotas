@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
@@ -136,7 +137,7 @@ public class Ventana extends javax.swing.JFrame {
     } //fin del metodo
     
     
-        private String getFechaHora(java.util.GregorianCalendar fechaHora) {
+        private String getFechaHoraESP(java.util.GregorianCalendar fechaHora) {
         String fecha = "";
         switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
             case java.util.Calendar.MONDAY:
@@ -165,7 +166,34 @@ public class Ventana extends javax.swing.JFrame {
         return fecha;
     }//fin metodo fecha
         
-        
+         private String getFechaHoraING(java.util.GregorianCalendar fechaHora) {
+        String fecha = "";
+        switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
+            case java.util.Calendar.MONDAY:
+                fecha = "Monday, ";
+                break;
+            case java.util.Calendar.TUESDAY:
+                fecha = "Tuesday, ";
+                break;
+            case java.util.Calendar.WEDNESDAY:
+                fecha = "Wednesday, ";
+                break;
+            case java.util.Calendar.THURSDAY:
+                fecha = "Thursday, ";
+                break;
+            case java.util.Calendar.FRIDAY:
+                fecha = "Friday, ";
+                break;
+            case java.util.Calendar.SATURDAY:
+                fecha = "Saturday, ";
+                break;
+            case java.util.Calendar.SUNDAY:
+                fecha = "Sunday, ";
+        }
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        fecha = fecha + formatoFecha.format(fechaHora.getTime());
+        return fecha;
+    }//fin metodo fecha
         
         
 
@@ -200,6 +228,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        idioma_btnGroup = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         notas = new javax.swing.JTextArea();
         MenuSuperior = new javax.swing.JMenuBar();
@@ -222,8 +251,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
-        esp = new javax.swing.JMenuItem();
-        ingles = new javax.swing.JMenuItem();
+        esp = new javax.swing.JRadioButtonMenuItem();
+        ing = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -408,6 +437,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         idioma.setText("Idioma");
         idioma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        idioma_btnGroup.add(esp);
+        esp.setSelected(true);
         esp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/esp.gif"))); // NOI18N
         esp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,13 +447,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         idioma.add(esp);
 
-        ingles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ingles.jpg"))); // NOI18N
-        ingles.addActionListener(new java.awt.event.ActionListener() {
+        idioma_btnGroup.add(ing);
+        ing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ing.jpg"))); // NOI18N
+        ing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inglesActionPerformed(evt);
+                ingActionPerformed(evt);
             }
         });
-        idioma.add(ingles);
+        idioma.add(ing);
 
         MenuSuperior.add(idioma);
 
@@ -514,7 +546,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
          // TODO add your handling code here:
          fechaHora = new java.util.GregorianCalendar();
-          notas.setText(notas.getText() + getFechaHora(fechaHora));
+         if(esp.isSelected()){
+          notas.setText(notas.getText() + getFechaHoraESP(fechaHora));
+         }else{
+          notas.setText(notas.getText() + getFechaHoraING(fechaHora));
+         }
+         
     }//GEN-LAST:event_fechaActionPerformed
 
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
@@ -529,61 +566,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void AcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcercaActionPerformed
         // TODO add your handling code here:
-        
+        if(esp.isSelected()){
     JOptionPane.showMessageDialog(this, "Aplicación creada por Raul Pascual", "Informacion", INFORMATION_MESSAGE);
+        }else{
+        JOptionPane.showMessageDialog(this, "Application made by Raul Pascual", "Information", INFORMATION_MESSAGE);
+        }
 
        
     }//GEN-LAST:event_AcercaActionPerformed
-
-    private void inglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inglesActionPerformed
-          // TODO add your handling code here:
-          
-          archivo.setText("File");
-          Nuevo.setText("New");
-          Abrir.setText("Open");
-          Guardar.setText("Save");
-          Salir.setText("Exit");
-          Acerca.setText("About...");
-          
-          Editar.setText("Edit");
-          ColorFondo.setText("Background Color");
-          ColorLetras.setText("Word Color");
-          fuentes.setText("Fonts");
-          buscar.setText("Find");
-          
-          fecha.setText("Date and hour");
-          
-          Formato.setText("Format");
-          ajusteLinea.setText("Word wrap");
-          
-          idioma.setText("Language");
-          
-    }//GEN-LAST:event_inglesActionPerformed
-
-    private void espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espActionPerformed
-        // TODO add your handling code here:
-                  
-          archivo.setText("Archivo");
-          Nuevo.setText("Nuevo");
-          Abrir.setText("Abrir");
-          Guardar.setText("Guardar");
-          Salir.setText("Salir");
-          Acerca.setText("Acerca...");
-          
-          Editar.setText("Editar");
-          ColorFondo.setText("Color de fondo");
-          ColorLetras.setText("Color de las letras");
-          fuentes.setText("Fuentes");
-          buscar.setText("Buscar");
-          fecha.setText("Fecha y hora");
-          
-          Formato.setText("Formato");
-          ajusteLinea.setText("Ajuste de linea");
-          
-          idioma.setText("Idioma");
-        
-        
-    }//GEN-LAST:event_espActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
          // TODO add your handling code here:
@@ -639,6 +629,55 @@ private void buscarpalabra(JTextArea notas, String texto) {
             h.removeAllHighlights();
          }
     }//GEN-LAST:event_notasMouseClicked
+
+    private void espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espActionPerformed
+        // TODO add your handling code here:
+          archivo.setText("Archivo");
+          Nuevo.setText("Nuevo");
+          Abrir.setText("Abrir");
+          Guardar.setText("Guardar");
+          Salir.setText("Salir");
+          Acerca.setText("Acerca...");
+          
+          Editar.setText("Editar");
+          ColorFondo.setText("Color de fondo");
+          ColorLetras.setText("Color de las letras");
+          fuentes.setText("Fuentes");
+          buscar.setText("Buscar");
+          fecha.setText("Fecha y hora");
+          
+          Formato.setText("Formato");
+          ajusteLinea.setText("Ajuste de linea");
+          
+          idioma.setText("Idioma");
+        
+        
+    }//GEN-LAST:event_espActionPerformed
+
+    private void ingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingActionPerformed
+        // TODO add your handling code here:
+        archivo.setText("File");
+          Nuevo.setText("New");
+          Abrir.setText("Open");
+          Guardar.setText("Save");
+          Salir.setText("Exit");
+          Acerca.setText("About...");
+          
+          Editar.setText("Edit");
+          ColorFondo.setText("Background Color");
+          ColorLetras.setText("Word Color");
+          fuentes.setText("Fonts");
+          buscar.setText("Find");
+          
+          fecha.setText("Date and hour");
+          
+          Formato.setText("Format");
+          ajusteLinea.setText("Word wrap");
+          
+          idioma.setText("Language");
+
+     
+    }//GEN-LAST:event_ingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -703,12 +742,13 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JCheckBoxMenuItem ajusteLinea;
     private javax.swing.JMenu archivo;
     private javax.swing.JMenuItem buscar;
-    private javax.swing.JMenuItem esp;
+    private javax.swing.JRadioButtonMenuItem esp;
     private javax.swing.JMenuItem fecha;
     private javax.swing.JMenu fuentes;
     private javax.swing.JMenuItem georgia;
     private javax.swing.JMenu idioma;
-    private javax.swing.JMenuItem ingles;
+    private javax.swing.ButtonGroup idioma_btnGroup;
+    private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea notas;
     private javax.swing.JMenuItem tahoma;
@@ -716,4 +756,5 @@ private void buscarpalabra(JTextArea notas, String texto) {
   private java.util.GregorianCalendar fechaHora;
    boolean modificado = false;
    boolean guardado = false;
+   
 }
