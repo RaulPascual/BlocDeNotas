@@ -462,8 +462,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_AbrirActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-         // TODO add your handling code here:
+         // TODO add your handling code here
          System.exit(0);
+         
     }//GEN-LAST:event_SalirActionPerformed
 
     private void ColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorFondoActionPerformed
