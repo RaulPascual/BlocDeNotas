@@ -246,6 +246,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Impact = new javax.swing.JMenuItem();
         tahoma = new javax.swing.JMenuItem();
         georgia = new javax.swing.JMenuItem();
+        jokerman = new javax.swing.JMenuItem();
+        inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
         fecha = new javax.swing.JMenuItem();
         Formato = new javax.swing.JMenu();
@@ -397,6 +399,24 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         fuentes.add(georgia);
+
+        jokerman.setFont(new java.awt.Font("Jokerman", 0, 15)); // NOI18N
+        jokerman.setText("Jokerman");
+        jokerman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jokermanActionPerformed(evt);
+            }
+        });
+        fuentes.add(jokerman);
+
+        inkFree.setFont(new java.awt.Font("Ink Free", 0, 15)); // NOI18N
+        inkFree.setText("Ink Free");
+        inkFree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inkFreeActionPerformed(evt);
+            }
+        });
+        fuentes.add(inkFree);
 
         Editar.add(fuentes);
 
@@ -681,6 +701,20 @@ private void buscarpalabra(JTextArea notas, String texto) {
      
     }//GEN-LAST:event_ingActionPerformed
 
+    private void jokermanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jokermanActionPerformed
+        // TODO add your handling code here:
+              Font fuente = new Font("Jokerman", 3, 20);
+            notas.setFont(fuente); 
+    }//GEN-LAST:event_jokermanActionPerformed
+
+    private void inkFreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inkFreeActionPerformed
+        // TODO add your handling code here:
+              Font fuente = new Font("Ink Free", 3, 20);
+        notas.setFont(fuente); 
+    }//GEN-LAST:event_inkFreeActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -751,7 +785,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JMenu idioma;
     private javax.swing.ButtonGroup idioma_btnGroup;
     private javax.swing.JRadioButtonMenuItem ing;
+    private javax.swing.JMenuItem inkFree;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JMenuItem tahoma;
     // End of variables declaration//GEN-END:variables
