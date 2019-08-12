@@ -400,6 +400,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
         Editar.add(fuentes);
 
+        buscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -424,6 +425,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Formato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         ajusteLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ajusteLinea.setSelected(true);
         ajusteLinea.setText("Ajuste de Linea");
         ajusteLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
