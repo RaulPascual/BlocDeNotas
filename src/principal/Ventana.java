@@ -8,6 +8,7 @@ package principal;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -672,6 +674,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
                      Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
          }
+         
+         
+         
+       /* if(evt.getButton()==MouseEvent.BUTTON3){
+          popDerecho = new JPopupMenu();
+         copiarpop = new JMenuItem("Copiar");
+        }*/
+         
     }//GEN-LAST:event_notasMouseClicked
 
     private void espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espActionPerformed
@@ -823,4 +833,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
    boolean modificado = false;
    boolean guardado = false;
    private JComboBox size;
+   private JPopupMenu popDerecho;
+   private JMenuItem cortarpop,copiarpop,pegarpop;
 }
