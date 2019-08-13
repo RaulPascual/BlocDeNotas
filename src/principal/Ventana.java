@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -49,7 +50,7 @@ public class Ventana extends javax.swing.JFrame {
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
        }catch(Exception e){}
-       
+       comprobaciones();
         ponerTitulo();
        
     }
@@ -59,6 +60,14 @@ public class Ventana extends javax.swing.JFrame {
      this.setTitle("Nuevo documento");
     }
     
+    private void comprobaciones(){
+      if(ajusteLinea.isSelected()){
+       notas.setLineWrap(true);
+       }else{
+       notas.setLineWrap(false);
+       }
+    
+    }
   
     private void abrirArchivo(){
         JFileChooser fileChooser = new JFileChooser();
@@ -243,6 +252,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Editar = new javax.swing.JMenu();
         ColorFondo = new javax.swing.JMenuItem();
         ColorLetras = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         fuentes = new javax.swing.JMenu();
         Arial = new javax.swing.JMenuItem();
         Impact = new javax.swing.JMenuItem();
@@ -362,6 +372,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(ColorLetras);
+
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem1.setText("Tamaño");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Editar.add(jMenuItem1);
 
         fuentes.setText("Fuentes");
         fuentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -526,7 +545,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void ColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorFondoActionPerformed
         // TODO add your handling code here:
         
-        Color initialcolor=Color.RED;    
+        Color initialcolor=Color.BLACK;    
         Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);    
         notas.setBackground(color);
         
@@ -535,7 +554,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void ColorLetrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorLetrasActionPerformed
         // TODO add your handling code here:
         
-         Color initialcolor=Color.RED;    
+         Color initialcolor=Color.WHITE;    
         Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);    
         notas.setForeground(color);
         
@@ -579,9 +598,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_fechaActionPerformed
 
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         
         if(ajusteLinea.isSelected()){
+           
         notas.setLineWrap(true);
         }else{
         notas.setLineWrap(false);
@@ -715,6 +735,11 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setFont(fuente); 
     }//GEN-LAST:event_inkFreeActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         // TODO add your handling code here:
+         
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     
     /**
@@ -788,13 +813,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.ButtonGroup idioma_btnGroup;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JMenuItem tahoma;
     // End of variables declaration//GEN-END:variables
-  private java.util.GregorianCalendar fechaHora;
+   private java.util.GregorianCalendar fechaHora;
    boolean modificado = false;
    boolean guardado = false;
-   
+   private JComboBox size;
 }
