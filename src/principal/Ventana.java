@@ -671,7 +671,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
+         
+         popDerecho.setVisible(false);
         
     }//GEN-LAST:event_notasKeyPressed
 
@@ -738,8 +740,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
          
          }
          
-         if(evt.getClickCount() == 2){
-                     Highlighter h = notas.getHighlighter();
+         if(evt.getClickCount() == 2 ){
+           Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
          }
          
@@ -754,7 +756,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
          popDerecho.add(copiarpop);
          popDerecho.add(pegarpop);
          popDerecho.add(cortarpop);
-         
+       
          
          
          
