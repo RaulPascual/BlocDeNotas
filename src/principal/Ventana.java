@@ -6,9 +6,15 @@
 package principal;
 
 
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Font;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
@@ -31,6 +38,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -667,8 +675,68 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
     }//GEN-LAST:event_notasKeyPressed
 
+    
+    private void cortar(){
+                      try {
+        Robot robot = new Robot();
+
+        // Simulate a key press
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_X);
+       
+
+         robot.keyRelease(KeyEvent.VK_X);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        } catch (AWTException e) {
+        e.printStackTrace();
+        }
+                      
+        popDerecho.setVisible(false);
+    }
+    
+    
+        private void copiar(){
+                      try {
+        Robot robot = new Robot();
+
+        // Simulate a key press
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_C);
+       
+
+         robot.keyRelease(KeyEvent.VK_C);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        } catch (AWTException e) {
+        e.printStackTrace();
+        }
+            popDerecho.setVisible(false);
+    }
+        
+        
+                private void pegar(){
+                      try {
+        Robot robot = new Robot();
+
+        // Simulate a key press
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+       
+
+         robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        } catch (AWTException e) {
+        e.printStackTrace();
+        }
+            popDerecho.setVisible(false);
+    }
+    
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
          // TODO add your handling code here:
+         
+         if(evt.getClickCount() == 1 && evt.getButton() == MouseEvent.BUTTON1){
+         popDerecho.setVisible(false);
+         
+         }
          
          if(evt.getClickCount() == 2){
                      Highlighter h = notas.getHighlighter();
@@ -677,10 +745,123 @@ private void buscarpalabra(JTextArea notas, String texto) {
          
          
          
-       /* if(evt.getButton()==MouseEvent.BUTTON3){
+         
+        if(evt.getButton()==MouseEvent.BUTTON3){
           popDerecho = new JPopupMenu();
          copiarpop = new JMenuItem("Copiar");
-        }*/
+         pegarpop = new JMenuItem("Pegar");
+         cortarpop = new JMenuItem("Cortar");
+         popDerecho.add(copiarpop);
+         popDerecho.add(pegarpop);
+         popDerecho.add(cortarpop);
+         
+         
+         
+         
+          
+      popDerecho.setLocation(evt.getLocationOnScreen());
+      popDerecho.setVisible(true);
+   
+      //Al hacer clic en el boton de cortar
+      cortarpop.addMouseListener(new MouseListener() {
+              @Override
+              public void mouseClicked(MouseEvent me) {
+                  //metodo cortar
+                   cortar();
+              }
+
+              @Override
+              public void mousePressed(MouseEvent me) {
+                 //metodo cortar
+                 cortar();
+              }
+
+              @Override
+              public void mouseReleased(MouseEvent me) {
+                //metodo cortar
+                cortar();
+              }
+
+              @Override
+              public void mouseEntered(MouseEvent me) {
+                 //metodo cortar
+         
+              }
+
+              @Override
+              public void mouseExited(MouseEvent me) {
+                 //metodo cortar
+              }
+          });
+      
+      
+            //Al hacer clic en el boton de copiar
+           copiarpop.addMouseListener(new MouseListener() {
+              @Override
+              public void mouseClicked(MouseEvent me) {
+                  //metodo copiar
+                  copiar();
+              }
+
+              @Override
+              public void mousePressed(MouseEvent me) {
+                 //metodo copiar
+                 copiar();
+              }
+
+              @Override
+              public void mouseReleased(MouseEvent me) {
+                //metodo copiar
+                copiar();
+              }
+
+              @Override
+              public void mouseEntered(MouseEvent me) {
+               
+         
+              }
+
+              @Override
+              public void mouseExited(MouseEvent me) {
+                 
+              }
+          });
+      
+      
+           //Al hacer clic en el boton de pegar
+              pegarpop.addMouseListener(new MouseListener() {
+              @Override
+              public void mouseClicked(MouseEvent me) {
+                  //metodo pegar
+                  pegar();
+              }
+
+              @Override
+              public void mousePressed(MouseEvent me) {
+                 //metodo pegar
+                 pegar();
+              }
+
+              @Override
+              public void mouseReleased(MouseEvent me) {
+                //metodo pegar
+                pegar();
+              }
+
+              @Override
+              public void mouseEntered(MouseEvent me) {
+                 
+         
+              }
+
+              @Override
+              public void mouseExited(MouseEvent me) {
+                 
+              }
+          });
+           
+         
+        }//fin del if
          
     }//GEN-LAST:event_notasMouseClicked
 
