@@ -9,6 +9,7 @@ package principal;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.List;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -257,7 +258,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Editar = new javax.swing.JMenu();
         ColorFondo = new javax.swing.JMenuItem();
         ColorLetras = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         fuentes = new javax.swing.JMenu();
         Arial = new javax.swing.JMenuItem();
         Impact = new javax.swing.JMenuItem();
@@ -377,15 +377,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(ColorLetras);
-
-        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem1.setText("Tamaño");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        Editar.add(jMenuItem1);
 
         fuentes.setText("Fuentes");
         fuentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -547,61 +538,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
          
     }//GEN-LAST:event_SalirActionPerformed
 
-    private void ColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorFondoActionPerformed
-        // TODO add your handling code here:
-        
-        Color initialcolor=Color.BLACK;    
-        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);    
-        notas.setBackground(color);
-        
-    }//GEN-LAST:event_ColorFondoActionPerformed
-
-    private void ColorLetrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorLetrasActionPerformed
-        // TODO add your handling code here:
-        
-         Color initialcolor=Color.WHITE;    
-        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);    
-        notas.setForeground(color);
-        
-    }//GEN-LAST:event_ColorLetrasActionPerformed
-
-    private void ArialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArialActionPerformed
-         // TODO add your handling code here:
-        
-         Font fuente = new Font("Arial", 3, 20);
-        notas.setFont(fuente); 
-        
-    }//GEN-LAST:event_ArialActionPerformed
-
-    private void ImpactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImpactActionPerformed
-        // TODO add your handling code here:
-         Font fuente = new Font("Impact", 3, 20);
-        notas.setFont(fuente); 
-    }//GEN-LAST:event_ImpactActionPerformed
-
-    private void tahomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tahomaActionPerformed
-        // TODO add your handling code here:
-         Font fuente = new Font("Tahoma", 3, 20);
-        notas.setFont(fuente); 
-    }//GEN-LAST:event_tahomaActionPerformed
-
-    private void georgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_georgiaActionPerformed
-        // TODO add your handling code here:
-         Font fuente = new Font("Georgia", 3, 20);
-        notas.setFont(fuente); 
-    }//GEN-LAST:event_georgiaActionPerformed
-
-    private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
-         // TODO add your handling code here:
-         fechaHora = new java.util.GregorianCalendar();
-         if(esp.isSelected()){
-          notas.setText(notas.getText() + getFechaHoraESP(fechaHora));
-         }else{
-          notas.setText(notas.getText() + getFechaHoraING(fechaHora));
-         }
-         
-    }//GEN-LAST:event_fechaActionPerformed
-
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
          // TODO add your handling code here:
         
@@ -623,20 +559,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
        
     }//GEN-LAST:event_AcercaActionPerformed
-
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-         // TODO add your handling code here:
-        
-         try{
-             String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
-         
-        buscarpalabra(notas, palabra);
-         }catch(NullPointerException ex){
-             Exception NullException;
-         }
-    
-        
-    }//GEN-LAST:event_buscarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
          // TODO add your handling code here:
@@ -740,11 +662,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
          // TODO add your handling code here:
          
-         if( evt.getButton() == MouseEvent.BUTTON1){
-         popDerecho.setVisible(false);
-         
-         }
-         
+
          if(evt.getClickCount() == 2 ){
            Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
@@ -863,7 +781,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
               }
           });
            
+         if(popDerecho.isVisible() && evt.getButton() == MouseEvent.BUTTON1){
+         popDerecho.setVisible(false);
          
+         }
+              
+              
         }//fin del if
          
     }//GEN-LAST:event_notasMouseClicked
@@ -917,26 +840,85 @@ private void buscarpalabra(JTextArea notas, String texto) {
      
     }//GEN-LAST:event_ingActionPerformed
 
-    private void jokermanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jokermanActionPerformed
+    private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
         // TODO add your handling code here:
-              Font fuente = new Font("Jokerman", 3, 20);
-            notas.setFont(fuente); 
-    }//GEN-LAST:event_jokermanActionPerformed
+        fechaHora = new java.util.GregorianCalendar();
+        if(esp.isSelected()){
+            notas.setText(notas.getText() + getFechaHoraESP(fechaHora));
+        }else{
+            notas.setText(notas.getText() + getFechaHoraING(fechaHora));
+        }
+
+    }//GEN-LAST:event_fechaActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+
+        try{
+            String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
+
+            buscarpalabra(notas, palabra);
+        }catch(NullPointerException ex){
+            Exception NullException;
+        }
+
+    }//GEN-LAST:event_buscarActionPerformed
 
     private void inkFreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inkFreeActionPerformed
         // TODO add your handling code here:
-              Font fuente = new Font("Ink Free", 3, 20);
-        notas.setFont(fuente); 
+        Font fuente = new Font("Ink Free", 3, 20);
+        notas.setFont(fuente);
     }//GEN-LAST:event_inkFreeActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         // TODO add your handling code here:
-         
-        List lista = new List();
-        lista.addItem("46");
-        lista.setVisible(true);
-         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jokermanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jokermanActionPerformed
+        // TODO add your handling code here:
+        Font fuente = new Font("Jokerman", 3, 20);
+        notas.setFont(fuente);
+    }//GEN-LAST:event_jokermanActionPerformed
+
+    private void georgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_georgiaActionPerformed
+        // TODO add your handling code here:
+        Font fuente = new Font("Georgia", 3, 20);
+        notas.setFont(fuente);
+    }//GEN-LAST:event_georgiaActionPerformed
+
+    private void tahomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tahomaActionPerformed
+        // TODO add your handling code here:
+        Font fuente = new Font("Tahoma", 3, 20);
+        notas.setFont(fuente);
+    }//GEN-LAST:event_tahomaActionPerformed
+
+    private void ImpactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImpactActionPerformed
+        // TODO add your handling code here:
+        Font fuente = new Font("Impact", 3, 20);
+        notas.setFont(fuente);
+    }//GEN-LAST:event_ImpactActionPerformed
+
+    private void ArialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArialActionPerformed
+        // TODO add your handling code here:
+
+        Font fuente = new Font("Arial", 3, 20);
+        notas.setFont(fuente);
+
+    }//GEN-LAST:event_ArialActionPerformed
+
+    private void ColorLetrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorLetrasActionPerformed
+        // TODO add your handling code here:
+
+        Color initialcolor=Color.WHITE;
+        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);
+        notas.setForeground(color);
+
+    }//GEN-LAST:event_ColorLetrasActionPerformed
+
+    private void ColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorFondoActionPerformed
+        // TODO add your handling code here:
+
+        Color initialcolor=Color.BLACK;
+        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);
+        notas.setBackground(color);
+
+    }//GEN-LAST:event_ColorFondoActionPerformed
 
     
     
@@ -1011,7 +993,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.ButtonGroup idioma_btnGroup;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
