@@ -8,10 +8,9 @@ package principal;
 
 import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.Robot;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,22 +25,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -67,7 +61,8 @@ public class Ventana extends javax.swing.JFrame {
     
     
     private void ponerTitulo(){
-     this.setTitle("Nuevo documento");
+    
+    this.setTitle("Nuevo documento");
     }
     
     private void comprobaciones(){
@@ -631,9 +626,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
          // TODO add your handling code here:
-         String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
-        buscarpalabra(notas, palabra);
         
+         try{
+             String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
+         
+        buscarpalabra(notas, palabra);
+         }catch(NullPointerException ex){
+             Exception NullException;
+         }
     
         
     }//GEN-LAST:event_buscarActionPerformed
@@ -672,8 +672,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
          // TODO add your handling code here:
+        try{
+        popDerecho.setVisible(false);
+        }catch(Exception e){
+         Exception NullException;
+        }
          
-         popDerecho.setVisible(false);
         
     }//GEN-LAST:event_notasKeyPressed
 
@@ -689,11 +693,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
          robot.keyRelease(KeyEvent.VK_X);
         robot.keyRelease(KeyEvent.VK_CONTROL);
+        popDerecho.setVisible(false);
         } catch (AWTException e) {
         e.printStackTrace();
         }
                       
-        popDerecho.setVisible(false);
+        
     }
     
     
@@ -735,7 +740,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
          // TODO add your handling code here:
          
-         if(evt.getClickCount() == 1 && evt.getButton() == MouseEvent.BUTTON1){
+         if( evt.getButton() == MouseEvent.BUTTON1){
          popDerecho.setVisible(false);
          
          }
@@ -745,10 +750,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
             h.removeAllHighlights();
          }
          
-         
-         
-         
+
         if(evt.getButton()==MouseEvent.BUTTON3){
+           
           popDerecho = new JPopupMenu();
          copiarpop = new JMenuItem("Copiar");
          pegarpop = new JMenuItem("Pegar");
@@ -757,13 +761,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
          popDerecho.add(pegarpop);
          popDerecho.add(cortarpop);
        
-         
-         
-         
-          
+   
       popDerecho.setLocation(evt.getLocationOnScreen());
       popDerecho.setVisible(true);
-   
+      
       //Al hacer clic en el boton de cortar
       cortarpop.addMouseListener(new MouseListener() {
               @Override
@@ -930,6 +931,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
          // TODO add your handling code here:
+         
+        List lista = new List();
+        lista.addItem("46");
+        lista.setVisible(true);
          
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
