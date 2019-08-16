@@ -674,9 +674,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
         if(evt.getButton()==MouseEvent.BUTTON3){
           
-           if(popDerecho == null){
-           
-           }else{
+           if(popDerecho != null){
            popDerecho.setVisible(false);
            }
           popDerecho = new JPopupMenu();
