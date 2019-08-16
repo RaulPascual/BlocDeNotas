@@ -798,8 +798,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
         
         if(evt.getButton() == MouseEvent.BUTTON1){
-           if(popDerecho.isVisible()){
-           popDerecho.setVisible(false);
+           try{
+            if(popDerecho.isVisible()){
+               
+                   popDerecho.setVisible(false);
+            }
+               }catch(Exception e){
+                   System.out.println("No esta visible ahora");
+               
+           
            }
         
         }
