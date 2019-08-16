@@ -215,7 +215,8 @@ public class Ventana extends javax.swing.JFrame {
         
 
 private void buscarpalabra(JTextArea notas, String texto) {
-        if (texto.length() >= 1) {
+     if(texto != null) {   
+    if (texto.length() >= 1) {
             DefaultHighlighter.DefaultHighlightPainter subrayador = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
             Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
@@ -232,9 +233,11 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }else{
                 JOptionPane.showMessageDialog(this, "No se ha enconrado esa palabra", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             }
-        } 
+        }else{
+             JOptionPane.showMessageDialog(this, "La palabra no puede estar vacía", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+     }
     }
-
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -670,7 +673,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
          
 
         if(evt.getButton()==MouseEvent.BUTTON3){
+          
+           if(popDerecho == null){
            
+           }else{
+           popDerecho.setVisible(false);
+           }
           popDerecho = new JPopupMenu();
          copiarpop = new JMenuItem("Copiar");
          pegarpop = new JMenuItem("Pegar");
@@ -678,10 +686,11 @@ private void buscarpalabra(JTextArea notas, String texto) {
          popDerecho.add(copiarpop);
          popDerecho.add(pegarpop);
          popDerecho.add(cortarpop);
-       
+     
    
       popDerecho.setLocation(evt.getLocationOnScreen());
       popDerecho.setVisible(true);
+        
       
       //Al hacer clic en el boton de cortar
       cortarpop.addMouseListener(new MouseListener() {
@@ -787,7 +796,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
          }
               
               
-        }//fin del if
+        }//fin del if del clic derecho
+        
+        
+        if(evt.getButton() == MouseEvent.BUTTON1){
+           if(popDerecho.isVisible()){
+           popDerecho.setVisible(false);
+           }
+        
+        }
          
     }//GEN-LAST:event_notasMouseClicked
 
