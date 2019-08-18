@@ -284,6 +284,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
         });
 
         notas.setColumns(20);
@@ -800,7 +803,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
         if(evt.getButton() == MouseEvent.BUTTON1){
            try{
             if(popDerecho.isVisible()){
-               
                    popDerecho.setVisible(false);
             }
                }catch(Exception e){
@@ -941,6 +943,18 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setBackground(color);
 
     }//GEN-LAST:event_ColorFondoActionPerformed
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        // TODO add your handling code here:
+        try{
+        if(popDerecho.isVisible()){
+        popDerecho.setVisible(false);
+        }
+        }catch(Exception e){
+            System.out.println("No es visible");
+        }
+        
+    }//GEN-LAST:event_formWindowDeactivated
 
     
     
