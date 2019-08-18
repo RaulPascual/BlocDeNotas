@@ -9,8 +9,6 @@ package principal;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.List;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -241,12 +239,7 @@ public class Ventana extends javax.swing.JFrame {
          if(notas.isEmpty()){
          cont =0;
          }else{
-         posicion = notas.indexOf(" ");
-             while (posicion != -1) {
-                 cont++;
-                 posicion = notas.indexOf(" ", posicion+1);
-                 
-             }
+        cont = notas.split("\\s+|\n|,").length;
          }
          
          return cont;
