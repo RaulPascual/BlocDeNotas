@@ -37,6 +37,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -52,6 +54,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+       ponerInfo();
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
        }catch(Exception e){}
@@ -74,7 +77,24 @@ public class Ventana extends javax.swing.JFrame {
        }
     
     }
-  
+    
+    private void ponerInfo(){
+    notas.addCaretListener(new CaretListener() {
+        @Override
+        public void caretUpdate(CaretEvent e) {
+            int pos = e.getDot();
+                   try {
+           int row = notas.getLineOfOffset( pos ) + 1;
+           int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
+           info.setText("Línea: " + row + " Columna: " + col );
+       }
+       catch( BadLocationException exc ){
+           System.out.println(exc);
+       }
+        }
+    });
+    }
+    
     private void abrirArchivo(){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -251,6 +271,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         idioma_btnGroup = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         notas = new javax.swing.JTextArea();
+        info = new javax.swing.JLabel();
         MenuSuperior = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -292,6 +313,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setColumns(20);
         notas.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         notas.setRows(5);
+        notas.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         notas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 notasMouseClicked(evt);
@@ -306,6 +328,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         jScrollPane2.setViewportView(notas);
+
+        info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         MenuSuperior.setBackground(new java.awt.Color(153, 255, 153));
         MenuSuperior.setForeground(new java.awt.Color(51, 0, 51));
@@ -509,11 +533,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+            .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -522,7 +550,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
          // TODO add your handling code here:
          guardarArchivo();
-         
+
          
     }//GEN-LAST:event_GuardarActionPerformed
 
@@ -600,6 +628,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
          // TODO add your handling code here:
+         
+         ponerInfo();
         try{
         popDerecho.setVisible(false);
         }catch(Exception e){
@@ -667,8 +697,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
          // TODO add your handling code here:
-         
-
+                  
          if(evt.getClickCount() == 2 ){
            Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
@@ -879,9 +908,16 @@ private void buscarpalabra(JTextArea notas, String texto) {
         // TODO add your handling code here:
 
         try{
-            String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
+            if(esp.isSelected()){
+              String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
 
             buscarpalabra(notas, palabra);
+            }else{
+              String palabra = JOptionPane.showInputDialog(this, "Search word");
+
+            buscarpalabra(notas, palabra);
+            }
+          
         }catch(NullPointerException ex){
             Exception NullException;
         }
@@ -1027,6 +1063,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JMenuItem georgia;
     private javax.swing.JMenu idioma;
     private javax.swing.ButtonGroup idioma_btnGroup;
+    private javax.swing.JLabel info;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
     private javax.swing.JScrollPane jScrollPane2;
