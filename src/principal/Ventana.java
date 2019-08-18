@@ -54,6 +54,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+       
        ponerInfo();
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
@@ -86,7 +87,7 @@ public class Ventana extends javax.swing.JFrame {
                    try {
            int row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
-           info.setText("Línea: " + row + " Columna: " + col );
+           info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()));
        }
        catch( BadLocationException exc ){
            System.out.println(exc);
@@ -231,7 +232,25 @@ public class Ventana extends javax.swing.JFrame {
         fecha = fecha + formatoFecha.format(fechaHora.getTime());
         return fecha;
     }//fin metodo fecha
-        
+    
+         
+         private static int contarPalabras(String notas){
+         notas.trim();
+         int cont = 1;
+         int posicion;
+         if(notas.isEmpty()){
+         cont =0;
+         }else{
+         posicion = notas.indexOf(" ");
+             while (posicion != -1) {
+                 cont++;
+                 posicion = notas.indexOf(" ", posicion+1);
+                 
+             }
+         }
+         
+         return cont;
+         }
         
 
 private void buscarpalabra(JTextArea notas, String texto) {
@@ -533,8 +552,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,7 +648,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
-         // TODO add your handling code here:
+          // TODO add your handling code here:
          
          ponerInfo();
         try{
@@ -635,7 +656,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         }catch(Exception e){
          Exception NullException;
         }
-         
+       
+        contarPalabras(notas.getText());
         
     }//GEN-LAST:event_notasKeyPressed
 
