@@ -83,10 +83,17 @@ public class Ventana extends javax.swing.JFrame {
         public void caretUpdate(CaretEvent e) {
             int pos = e.getDot();
                    try {
+                       if(esp.isSelected()){
            int row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
            info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()));
-       }
+       }else{
+            int    row = notas.getLineOfOffset( pos ) + 1;
+           int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
+           info.setText("Line: " + row + " Column: " + col + " Number of words: " + contarPalabras(notas.getText()));       
+                       }
+                   }
+                       
        catch( BadLocationException exc ){
            System.out.println(exc);
        }
