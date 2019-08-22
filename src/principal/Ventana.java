@@ -8,9 +8,8 @@ package principal;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.List;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -54,6 +53,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+       
        ponerInfo();
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
@@ -69,6 +69,13 @@ public class Ventana extends javax.swing.JFrame {
     this.setTitle("Nuevo documento");
     }
     
+    private void setRowHeader(Component view){
+      scroll.setViewportView(notas);
+      scroll.setRowHeaderView(notas);
+    
+    
+    }
+    
     private void comprobaciones(){
       if(ajusteLinea.isSelected()){
        notas.setLineWrap(true);
@@ -77,17 +84,25 @@ public class Ventana extends javax.swing.JFrame {
        }
     
     }
-    
+        
     private void ponerInfo(){
+        
     notas.addCaretListener(new CaretListener() {
         @Override
         public void caretUpdate(CaretEvent e) {
             int pos = e.getDot();
                    try {
+                       if(esp.isSelected()){
            int row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
-           info.setText("Línea: " + row + " Columna: " + col );
-       }
+           info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()));
+       }else{
+            int    row = notas.getLineOfOffset( pos ) + 1;
+           int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
+           info.setText("Line: " + row + " Column: " + col + " Number of words: " + contarPalabras(notas.getText()));       
+                       }
+                   }
+                       
        catch( BadLocationException exc ){
            System.out.println(exc);
        }
@@ -151,9 +166,17 @@ public class Ventana extends javax.swing.JFrame {
         
       
             try {
-                escritor = new FileWriter(archivo + ".txt");
+                
+                if(archivo.getName().contains(".")){
+                   escritor = new FileWriter(archivo); 
                  escritor.write(notas.getText());
                 guardado = true;
+                }else{
+                   escritor = new FileWriter(archivo + ".txt");
+                 escritor.write(notas.getText());
+                guardado = true;
+                }
+             
                  
             } catch (IOException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,7 +254,20 @@ public class Ventana extends javax.swing.JFrame {
         fecha = fecha + formatoFecha.format(fechaHora.getTime());
         return fecha;
     }//fin metodo fecha
-        
+    
+         
+         private static int contarPalabras(String notas){
+         notas.trim();
+         int cont = 1;
+         int posicion;
+         if(notas.isEmpty()){
+         cont =0;
+         }else{
+        cont = notas.split("\\s+|\n|,").length;
+         }
+         
+         return cont;
+         }
         
 
 private void buscarpalabra(JTextArea notas, String texto) {
@@ -269,7 +305,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void initComponents() {
 
         idioma_btnGroup = new javax.swing.ButtonGroup();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JScrollPane();
         notas = new javax.swing.JTextArea();
         info = new javax.swing.JLabel();
         MenuSuperior = new javax.swing.JMenuBar();
@@ -327,7 +363,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
                 notasKeyTyped(evt);
             }
         });
-        jScrollPane2.setViewportView(notas);
+        scroll.setViewportView(notas);
 
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -533,13 +569,16 @@ private void buscarpalabra(JTextArea notas, String texto) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -627,7 +666,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
-         // TODO add your handling code here:
+          // TODO add your handling code here:
          
          ponerInfo();
         try{
@@ -635,7 +674,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         }catch(Exception e){
          Exception NullException;
         }
-         
+       
+        contarPalabras(notas.getText());
         
     }//GEN-LAST:event_notasKeyPressed
 
@@ -914,7 +954,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
             buscarpalabra(notas, palabra);
             }else{
               String palabra = JOptionPane.showInputDialog(this, "Search word");
-
             buscarpalabra(notas, palabra);
             }
           
@@ -987,7 +1026,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         popDerecho.setVisible(false);
         }
         }catch(Exception e){
-            System.out.println("No es visible");
+            System.out.println("No esta visible");
         }
         
     }//GEN-LAST:event_formWindowDeactivated
@@ -1066,9 +1105,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JLabel info;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
+    private javax.swing.JScrollPane scroll;
     private javax.swing.JMenuItem tahoma;
     // End of variables declaration//GEN-END:variables
    private java.util.GregorianCalendar fechaHora;
