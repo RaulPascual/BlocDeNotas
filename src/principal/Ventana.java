@@ -954,7 +954,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
             buscarpalabra(notas, palabra);
             }else{
               String palabra = JOptionPane.showInputDialog(this, "Search word");
-
             buscarpalabra(notas, palabra);
             }
           
