@@ -8,6 +8,7 @@ package principal;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -68,6 +69,13 @@ public class Ventana extends javax.swing.JFrame {
     this.setTitle("Nuevo documento");
     }
     
+    private void setRowHeader(Component view){
+      scroll.setViewportView(notas);
+      scroll.setRowHeaderView(notas);
+    
+    
+    }
+    
     private void comprobaciones(){
       if(ajusteLinea.isSelected()){
        notas.setLineWrap(true);
@@ -76,8 +84,9 @@ public class Ventana extends javax.swing.JFrame {
        }
     
     }
-    
+        
     private void ponerInfo(){
+        
     notas.addCaretListener(new CaretListener() {
         @Override
         public void caretUpdate(CaretEvent e) {
@@ -157,9 +166,17 @@ public class Ventana extends javax.swing.JFrame {
         
       
             try {
-                escritor = new FileWriter(archivo + ".txt");
+                
+                if(archivo.getName().contains(".")){
+                   escritor = new FileWriter(archivo); 
                  escritor.write(notas.getText());
                 guardado = true;
+                }else{
+                   escritor = new FileWriter(archivo + ".txt");
+                 escritor.write(notas.getText());
+                guardado = true;
+                }
+             
                  
             } catch (IOException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -288,7 +305,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void initComponents() {
 
         idioma_btnGroup = new javax.swing.ButtonGroup();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JScrollPane();
         notas = new javax.swing.JTextArea();
         info = new javax.swing.JLabel();
         MenuSuperior = new javax.swing.JMenuBar();
@@ -346,7 +363,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
                 notasKeyTyped(evt);
             }
         });
-        jScrollPane2.setViewportView(notas);
+        scroll.setViewportView(notas);
 
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -553,14 +570,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1088,9 +1106,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JLabel info;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
+    private javax.swing.JScrollPane scroll;
     private javax.swing.JMenuItem tahoma;
     // End of variables declaration//GEN-END:variables
    private java.util.GregorianCalendar fechaHora;
