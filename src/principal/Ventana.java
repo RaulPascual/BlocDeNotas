@@ -32,6 +32,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -327,6 +328,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
         fecha = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
@@ -521,6 +523,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(fecha);
+
+        jMenuItem1.setText("Tamaño");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Editar.add(jMenuItem1);
 
         MenuSuperior.add(Editar);
 
@@ -1031,6 +1041,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
     }//GEN-LAST:event_formWindowDeactivated
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        //Size size = new Size();
+     //   size.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     
     /**
@@ -1105,6 +1123,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JLabel info;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JScrollPane scroll;

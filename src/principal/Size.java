@@ -5,8 +5,11 @@
  */
 package principal;
 
+import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -29,13 +32,28 @@ public class Size extends javax.swing.JFrame {
       for(int i = 5; i<40; i++){
       modelo.addElement(i);
       combo.setModel(modelo);
-      
+      btnAceptar.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent pulsado) {
+              
+              
+          }
+      });
       }
       
     combo.setSelectedItem(16);
     
     }
-
+    
+   public int getTamaño(){
+   int tamaño = (int) combo.getSelectedItem();
+ 
+       return tamaño;
+       
+   }
+     
+   
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,10 +137,7 @@ public class Size extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         
-    /* Ventana ventana = new Ventana();
-     String texto = Ventana.notas.getText();
-     ventana.notas.setText(texto);
-    ventana.setVisible(true);*/
+    this.setVisible(false);
      
        
         
