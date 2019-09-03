@@ -314,8 +314,10 @@
           <Component id="scroll" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="info" min="-2" pref="660" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="info" pref="382" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="infoTam" min="-2" pref="275" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="slider" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -328,8 +330,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="info" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="slider" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="infoTam" alignment="0" max="32767" attributes="0"/>
+                          <Component id="slider" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -378,6 +383,8 @@
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="sliderStateChanged"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="infoTam">
     </Component>
   </SubComponents>
 </Form>
