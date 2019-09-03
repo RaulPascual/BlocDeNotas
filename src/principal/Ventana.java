@@ -97,6 +97,7 @@ public class Ventana extends javax.swing.JFrame {
            int row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
            info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()));
+                           System.out.println(slider.getValue());
        }else{
             int    row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
@@ -309,6 +310,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         scroll = new javax.swing.JScrollPane();
         notas = new javax.swing.JTextArea();
         info = new javax.swing.JLabel();
+        slider = new javax.swing.JSlider();
         MenuSuperior = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -328,7 +330,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
         inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
         fecha = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
@@ -368,6 +369,18 @@ private void buscarpalabra(JTextArea notas, String texto) {
         scroll.setViewportView(notas);
 
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        slider.setMaximum(50);
+        slider.setMinimum(10);
+        slider.setMinorTickSpacing(10);
+        slider.setPaintLabels(true);
+        slider.setPaintTicks(true);
+        slider.setValue(12);
+        slider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderStateChanged(evt);
+            }
+        });
 
         MenuSuperior.setBackground(new java.awt.Color(153, 255, 153));
         MenuSuperior.setForeground(new java.awt.Color(51, 0, 51));
@@ -524,14 +537,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         Editar.add(fecha);
 
-        jMenuItem1.setText("Tamaño");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        Editar.add(jMenuItem1);
-
         MenuSuperior.add(Editar);
 
         Formato.setText("Formato");
@@ -579,18 +584,24 @@ private void buscarpalabra(JTextArea notas, String texto) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE))))
         );
 
         pack();
@@ -1041,13 +1052,13 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
     }//GEN-LAST:event_formWindowDeactivated
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
-        //Size size = new Size();
-     //   size.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
+         // TODO add your handling code here:
+         System.out.println(slider.getValue());
+         int tamaño = slider.getValue();
+         Font fuente = new Font(notas.getFont().getFamily(), Font.PLAIN, tamaño);
+         notas.setFont(fuente);
+    }//GEN-LAST:event_sliderStateChanged
 
     
     
@@ -1123,10 +1134,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JLabel info;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JSlider slider;
     private javax.swing.JMenuItem tahoma;
     // End of variables declaration//GEN-END:variables
    private java.util.GregorianCalendar fechaHora;
