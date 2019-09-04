@@ -1087,6 +1087,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
 		imp = new Impresora();
 		imp.imprimir(texto);
 		}else{
+                    JOptionPane.showMessageDialog(this, "El documento esta vacío");
 		System.out.println("NO SE IMPRIME NADA EN BLANCO...");
  
 		notas.requestFocus();
