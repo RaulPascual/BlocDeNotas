@@ -97,7 +97,6 @@ public class Ventana extends javax.swing.JFrame {
            int row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
            info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()) );
-                           System.out.println(slider.getValue());
        }else{
             int    row = notas.getLineOfOffset( pos ) + 1;
            int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
@@ -354,6 +353,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         notas.setRows(5);
         notas.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        notas.setSelectionColor(new java.awt.Color(255, 102, 102));
         notas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 notasMouseClicked(evt);
@@ -377,11 +377,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
         slider.setPaintLabels(true);
         slider.setPaintTicks(true);
         slider.setValue(12);
+        slider.setName("Tamaño"); // NOI18N
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderStateChanged(evt);
             }
         });
+
+        infoTam.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         MenuSuperior.setBackground(new java.awt.Color(153, 255, 153));
         MenuSuperior.setForeground(new java.awt.Color(51, 0, 51));
@@ -587,26 +590,22 @@ private void buscarpalabra(JTextArea notas, String texto) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(infoTam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(slider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 3, Short.MAX_VALUE))))
+                    .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoTam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(slider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -1059,7 +1058,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_formWindowDeactivated
 
     private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
-          // TODO add your handling code here:
+           // TODO add your handling code here:
          int tamaño = slider.getValue();
          Font fuente = new Font(notas.getFont().getFamily(), Font.PLAIN, tamaño);
          notas.setFont(fuente);
