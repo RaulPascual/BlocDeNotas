@@ -9,8 +9,10 @@ package principal;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -296,6 +298,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }
 }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,6 +319,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Nuevo = new javax.swing.JMenuItem();
         Abrir = new javax.swing.JMenuItem();
         Guardar = new javax.swing.JMenuItem();
+        imprimir = new javax.swing.JMenuItem();
         Salir = new javax.swing.JMenuItem();
         Acerca = new javax.swing.JMenuItem();
         Editar = new javax.swing.JMenu();
@@ -421,6 +425,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         archivo.add(Guardar);
+
+        imprimir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imprimir.setText("Imprimir");
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirActionPerformed(evt);
+            }
+        });
+        archivo.add(imprimir);
 
         Salir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Salir.setText("Salir");
@@ -1065,6 +1078,23 @@ private void buscarpalabra(JTextArea notas, String texto) {
          this.infoTam.setText( "Tamaño: " + slider.getValue());
     }//GEN-LAST:event_sliderStateChanged
 
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+        // TODO add your handling code here:
+                texto = "";
+                texto = notas.getText();
+                
+                if (!texto.equals("")){
+		imp = new Impresora();
+		imp.imprimir(texto);
+		}else{
+		System.out.println("NO SE IMPRIME NADA EN BLANCO...");
+ 
+		notas.requestFocus();
+		notas.select(0, texto.length());
+			}
+        
+    }//GEN-LAST:event_imprimirActionPerformed
+
     
     
     /**
@@ -1136,6 +1166,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JMenuItem georgia;
     private javax.swing.JMenu idioma;
     private javax.swing.ButtonGroup idioma_btnGroup;
+    private javax.swing.JMenuItem imprimir;
     private javax.swing.JLabel info;
     private javax.swing.JLabel infoTam;
     private javax.swing.JRadioButtonMenuItem ing;
@@ -1152,4 +1183,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
    private JComboBox size;
    private JPopupMenu popDerecho;
    private JMenuItem cortarpop,copiarpop,pegarpop;
+   private String texto;
+   Impresora imp;
 }
