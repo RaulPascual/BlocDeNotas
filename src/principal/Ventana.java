@@ -7,10 +7,13 @@ package principal;
 
 
 import java.awt.AWTException;
+import java.awt.Button;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Robot;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,6 +23,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +34,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -153,7 +159,7 @@ public class Ventana extends javax.swing.JFrame {
     }//fin del metodo
     
     
-    private void guardarArchivo(){
+    private File guardarArchivo(){
         JFileChooser fileChooser = new JFileChooser();
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
     
@@ -169,9 +175,11 @@ public class Ventana extends javax.swing.JFrame {
                  escritor.write(notas.getText());
                 guardado = true;
                 }else{
+                    
                    escritor = new FileWriter(archivo + ".txt");
                  escritor.write(notas.getText());
                 guardado = true;
+                this.setTitle(archivo.getName());
                 }
              
                  
@@ -190,7 +198,7 @@ public class Ventana extends javax.swing.JFrame {
       setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE); //Que no se cierre, por el evento windowClosing
      
      }
-    
+    return fileChooser.getSelectedFile();
     } //fin del metodo
     
     
@@ -309,6 +317,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         info = new javax.swing.JLabel();
         slider = new javax.swing.JSlider();
         infoTam = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         MenuSuperior = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -386,6 +395,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
 
         infoTam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setText("jLabel1");
 
         MenuSuperior.setBackground(new java.awt.Color(153, 255, 153));
         MenuSuperior.setForeground(new java.awt.Color(51, 0, 51));
@@ -625,7 +636,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
          // TODO add your handling code here:
          guardarArchivo();
-
+        
          
     }//GEN-LAST:event_GuardarActionPerformed
 
@@ -657,11 +668,13 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setLineWrap(false);
         }
     }//GEN-LAST:event_ajusteLineaActionPerformed
-
+    
     private void AcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcercaActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         if(esp.isSelected()){
-    JOptionPane.showMessageDialog(this, "Aplicación creada por Raul Pascual", "Informacion", INFORMATION_MESSAGE);
+            JOptionPane menu = new JOptionPane();
+  
+    menu.showMessageDialog(this, "Aplicación creada por Raul Pascual ","Informacion", INFORMATION_MESSAGE);
         }else{
         JOptionPane.showMessageDialog(this, "Application made by Raul Pascual", "Information", INFORMATION_MESSAGE);
         }
@@ -698,7 +711,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         // TODO add your handling code here:
         
         modificado = true;
-                
+                 
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
@@ -711,8 +724,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
          Exception NullException;
         }
        
-        contarPalabras(notas.getText());
-        
+        contarPalabras(notas.getText());     
+     
     }//GEN-LAST:event_notasKeyPressed
 
     
@@ -772,8 +785,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }
     
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
-         // TODO add your handling code here:
-                  
+         // TODO add your handling code here   
          infoTam.setText( "Tamaño de las letras: " + slider.getValue());
          if(evt.getClickCount() == 2 ){
            Highlighter h = notas.getHighlighter();
@@ -1174,6 +1186,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JLabel infoTam;
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JScrollPane scroll;
