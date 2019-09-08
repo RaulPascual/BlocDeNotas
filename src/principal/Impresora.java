@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Impresora {
     
-    Font fuente= new Font("Calibri", Font.PLAIN, 11);
+    Font fuente= new Font("Calibri", Font.PLAIN, 12);
     PrintJob printjob;
    Graphics pagina;
    

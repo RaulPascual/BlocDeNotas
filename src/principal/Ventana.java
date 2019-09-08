@@ -8,11 +8,9 @@ package principal;
 
 import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,7 +32,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -50,13 +47,15 @@ import javax.swing.text.Highlighter;
  * @author Raul
  */
 public class Ventana extends javax.swing.JFrame {
+      TextLineNumber numeroLinea;
 
     /**
      * Creates new form Ventana
      */
     public Ventana() {
         initComponents();
-       
+            numeroLinea = new TextLineNumber(notas);
+    scroll.setRowHeaderView(numeroLinea);
        ponerInfo();
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
@@ -64,20 +63,15 @@ public class Ventana extends javax.swing.JFrame {
        comprobaciones();
         ponerTitulo();
        
+       
     }
     
-    
+  
     private void ponerTitulo(){
-    
     this.setTitle("Nuevo documento");
     }
     
-    private void setRowHeader(Component view){
-      scroll.setViewportView(notas);
-      scroll.setRowHeaderView(notas);
-    
-    
-    }
+
     
     private void comprobaciones(){
       if(ajusteLinea.isSelected()){
@@ -89,7 +83,7 @@ public class Ventana extends javax.swing.JFrame {
     }
         
     private void ponerInfo(){
-        
+      
     notas.addCaretListener(new CaretListener() {
         @Override
         public void caretUpdate(CaretEvent e) {
@@ -272,6 +266,7 @@ public class Ventana extends javax.swing.JFrame {
          return cont;
          }
         
+   
 
 private void buscarpalabra(JTextArea notas, String texto) {
      if(texto != null) {   
@@ -354,7 +349,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
 
         notas.setColumns(20);
-        notas.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        notas.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         notas.setRows(5);
         notas.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         notas.setSelectionColor(new java.awt.Color(255, 102, 102));
@@ -373,14 +368,16 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         scroll.setViewportView(notas);
 
+        info.setBackground(new java.awt.Color(102, 102, 102));
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        slider.setMajorTickSpacing(10);
         slider.setMaximum(50);
         slider.setMinimum(10);
         slider.setMinorTickSpacing(10);
         slider.setPaintLabels(true);
         slider.setPaintTicks(true);
-        slider.setValue(12);
+        slider.setValue(18);
         slider.setName("Tamaño"); // NOI18N
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -388,7 +385,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
 
-        infoTam.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        infoTam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         MenuSuperior.setBackground(new java.awt.Color(153, 255, 153));
         MenuSuperior.setForeground(new java.awt.Color(51, 0, 51));
@@ -426,6 +423,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         archivo.add(Guardar);
 
+        imprimir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         imprimir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imprimir.setText("Imprimir");
         imprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -601,24 +599,24 @@ private void buscarpalabra(JTextArea notas, String texto) {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
+            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(infoTam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(slider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(slider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoTam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -705,7 +703,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
           // TODO add your handling code here:
-         
+         infoTam.setText( "Tamaño de las letras: " + slider.getValue());
          ponerInfo();
         try{
         popDerecho.setVisible(false);
@@ -776,7 +774,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
          // TODO add your handling code here:
                   
-         infoTam.setText( "Tamaño: " + slider.getValue());
+         infoTam.setText( "Tamaño de las letras: " + slider.getValue());
          if(evt.getClickCount() == 2 ){
            Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
@@ -929,6 +927,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
           Nuevo.setText("Nuevo");
           Abrir.setText("Abrir");
           Guardar.setText("Guardar");
+          imprimir.setText("Imprimir");
           Salir.setText("Salir");
           Acerca.setText("Acerca...");
           
@@ -948,11 +947,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }//GEN-LAST:event_espActionPerformed
 
     private void ingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingActionPerformed
-        // TODO add your handling code here:
-        archivo.setText("File");
+         // TODO add your handling code here:
+          archivo.setText("File");
           Nuevo.setText("New");
           Abrir.setText("Open");
           Guardar.setText("Save");
+          imprimir.setText("Print");
           Salir.setText("Exit");
           Acerca.setText("About...");
           
@@ -1002,6 +1002,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     }//GEN-LAST:event_buscarActionPerformed
 
+
+    
     private void inkFreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inkFreeActionPerformed
         // TODO add your handling code here:
         Font fuente = new Font("Ink Free", 3, 20);
@@ -1075,7 +1077,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
          int tamaño = slider.getValue();
          Font fuente = new Font(notas.getFont().getFamily(), Font.PLAIN, tamaño);
          notas.setFont(fuente);
-         this.infoTam.setText( "Tamaño: " + slider.getValue());
+         this.infoTam.setText( "Tamaño de las letras: " + slider.getValue());
     }//GEN-LAST:event_sliderStateChanged
 
     private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
@@ -1096,12 +1098,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
     }//GEN-LAST:event_imprimirActionPerformed
 
-    
-    
+   
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1186,4 +1188,5 @@ private void buscarpalabra(JTextArea notas, String texto) {
    private JMenuItem cortarpop,copiarpop,pegarpop;
    private String texto;
    Impresora imp;
+   Font f;
 }
