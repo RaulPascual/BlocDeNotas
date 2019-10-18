@@ -342,8 +342,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         jokerman = new javax.swing.JMenuItem();
         inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
-        fecha = new javax.swing.JMenuItem();
         mostrarNumLinea = new javax.swing.JCheckBoxMenuItem();
+        fecha = new javax.swing.JMenuItem();
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
@@ -597,15 +597,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         Editar.add(buscar);
 
-        fecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        fecha.setText("Fecha y hora");
-        fecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaActionPerformed(evt);
-            }
-        });
-        Editar.add(fecha);
-
+        mostrarNumLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mostrarNumLinea.setSelected(true);
         mostrarNumLinea.setText("Numero de linea");
         mostrarNumLinea.addActionListener(new java.awt.event.ActionListener() {
@@ -614,6 +606,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(mostrarNumLinea);
+
+        fecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fecha.setText("Fecha y hora");
+        fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaActionPerformed(evt);
+            }
+        });
+        Editar.add(fecha);
 
         MenuSuperior.add(Editar);
 
@@ -998,10 +999,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
           Editar.setText("Editar");
           ColorFondo.setText("Color de fondo");
           ColorLetras.setText("Color de las letras");
+          Colores.setText("Colores");
           fuentes.setText("Fuentes");
           buscar.setText("Buscar");
           fecha.setText("Fecha y hora");
           
+          mostrarNumLinea.setText("Numero de linea");
           Formato.setText("Formato");
           ajusteLinea.setText("Ajuste de linea");
           
@@ -1025,9 +1028,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
           ColorLetras.setText("Word Color");
           fuentes.setText("Fonts");
           buscar.setText("Find");
-          
+          mostrarNumLinea.setText("Line number");
           fecha.setText("Date and hour");
-          
+          Colores.setText("Themes");
           Formato.setText("Format");
           ajusteLinea.setText("Word wrap");
           
