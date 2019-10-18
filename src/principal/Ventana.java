@@ -329,6 +329,11 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Editar = new javax.swing.JMenu();
         ColorFondo = new javax.swing.JMenuItem();
         ColorLetras = new javax.swing.JMenuItem();
+        Colores = new javax.swing.JMenu();
+        Dark = new javax.swing.JMenuItem();
+        Light = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         fuentes = new javax.swing.JMenu();
         Arial = new javax.swing.JMenuItem();
         Impact = new javax.swing.JMenuItem();
@@ -484,6 +489,43 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(ColorLetras);
+
+        Colores.setText("Temas de color");
+        Colores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        Dark.setText("Dark");
+        Dark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DarkActionPerformed(evt);
+            }
+        });
+        Colores.add(Dark);
+
+        Light.setText("Light");
+        Light.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LightActionPerformed(evt);
+            }
+        });
+        Colores.add(Light);
+
+        jMenuItem1.setText("Nature");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Colores.add(jMenuItem1);
+
+        jMenuItem2.setText("Water");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        Colores.add(jMenuItem2);
+
+        Editar.add(Colores);
 
         fuentes.setText("Fuentes");
         fuentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1110,6 +1152,36 @@ private void buscarpalabra(JTextArea notas, String texto) {
         
     }//GEN-LAST:event_imprimirActionPerformed
 
+    private void DarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarkActionPerformed
+        // TODO add your handling code here:
+        notas.setBackground(Color.black);
+        notas.setForeground(Color.white);
+    }//GEN-LAST:event_DarkActionPerformed
+
+    private void LightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LightActionPerformed
+        // TODO add your handling code here:
+        notas.setBackground(Color.white);
+        notas.setForeground(Color.black);
+    }//GEN-LAST:event_LightActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Color fondo =  new Color(192, 235, 221);
+        Color letras =  new Color(1, 97, 66);
+        notas.setBackground(fondo);
+        notas.setForeground(letras);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        Color fondo =  new Color(186, 237, 245);
+        Color letras =  new Color(0, 42, 252);
+        notas.setBackground(fondo);
+        notas.setForeground(letras);
+                                    
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
    
     /**
      * @param args the command line arguments
@@ -1165,10 +1237,13 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JMenuItem Arial;
     private javax.swing.JMenuItem ColorFondo;
     private javax.swing.JMenuItem ColorLetras;
+    private javax.swing.JMenu Colores;
+    private javax.swing.JMenuItem Dark;
     private javax.swing.JMenu Editar;
     private javax.swing.JMenu Formato;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem Impact;
+    private javax.swing.JMenuItem Light;
     private javax.swing.JMenuBar MenuSuperior;
     private javax.swing.JMenuItem Nuevo;
     private javax.swing.JMenuItem Salir;
@@ -1187,6 +1262,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jokerman;
     private javax.swing.JTextArea notas;
     private javax.swing.JScrollPane scroll;
