@@ -50,7 +50,7 @@ import javax.swing.text.Highlighter;
 
 /**
  *
- * @author Raul
+ * @author Raul Pascual de la Calle
  */
 public class Ventana extends javax.swing.JFrame {
       TextLineNumber numeroLinea;
@@ -342,10 +342,10 @@ private void buscarpalabra(JTextArea notas, String texto) {
         jokerman = new javax.swing.JMenuItem();
         inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
-        mostrarNumLinea = new javax.swing.JCheckBoxMenuItem();
         fecha = new javax.swing.JMenuItem();
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
+        mostrarNumLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
         esp = new javax.swing.JRadioButtonMenuItem();
         ing = new javax.swing.JRadioButtonMenuItem();
@@ -597,16 +597,6 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         Editar.add(buscar);
 
-        mostrarNumLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        mostrarNumLinea.setSelected(true);
-        mostrarNumLinea.setText("Numero de linea");
-        mostrarNumLinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarNumLineaActionPerformed(evt);
-            }
-        });
-        Editar.add(mostrarNumLinea);
-
         fecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         fecha.setText("Fecha y hora");
         fecha.addActionListener(new java.awt.event.ActionListener() {
@@ -630,6 +620,16 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Formato.add(ajusteLinea);
+
+        mostrarNumLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mostrarNumLinea.setSelected(true);
+        mostrarNumLinea.setText("Numero de linea");
+        mostrarNumLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarNumLineaActionPerformed(evt);
+            }
+        });
+        Formato.add(mostrarNumLinea);
 
         MenuSuperior.add(Formato);
 
@@ -727,9 +727,9 @@ private void buscarpalabra(JTextArea notas, String texto) {
         if(esp.isSelected()){
             JOptionPane menu = new JOptionPane();
   
-    menu.showMessageDialog(this, "Aplicación creada por Raul Pascual ","Informacion", INFORMATION_MESSAGE);
+    menu.showMessageDialog(this, "Aplicación creada por Raul Pascual de la Calle","Informacion", INFORMATION_MESSAGE);
         }else{
-        JOptionPane.showMessageDialog(this, "Application made by Raul Pascual", "Information", INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Application made by Raul Pascual de la Calle", "Information", INFORMATION_MESSAGE);
         }
 
        
@@ -786,7 +786,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
                       try {
         Robot robot = new Robot();
 
-        // Simulate a key press
+        // Simula la pulsacion de la tecla
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_X);
        
