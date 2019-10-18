@@ -60,8 +60,8 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
-            numeroLinea = new TextLineNumber(notas);
-    scroll.setRowHeaderView(numeroLinea);
+        numeroLinea = new TextLineNumber(notas);
+        scroll.setRowHeaderView(numeroLinea);
        ponerInfo();
        try{
         setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
@@ -332,8 +332,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
         Colores = new javax.swing.JMenu();
         Dark = new javax.swing.JMenuItem();
         Light = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        nature = new javax.swing.JMenuItem();
+        water = new javax.swing.JMenuItem();
         fuentes = new javax.swing.JMenu();
         Arial = new javax.swing.JMenuItem();
         Impact = new javax.swing.JMenuItem();
@@ -343,6 +343,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
         inkFree = new javax.swing.JMenuItem();
         buscar = new javax.swing.JMenuItem();
         fecha = new javax.swing.JMenuItem();
+        mostrarNumLinea = new javax.swing.JCheckBoxMenuItem();
         Formato = new javax.swing.JMenu();
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         idioma = new javax.swing.JMenu();
@@ -509,21 +510,21 @@ private void buscarpalabra(JTextArea notas, String texto) {
         });
         Colores.add(Light);
 
-        jMenuItem1.setText("Nature");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        nature.setText("Nature");
+        nature.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                natureActionPerformed(evt);
             }
         });
-        Colores.add(jMenuItem1);
+        Colores.add(nature);
 
-        jMenuItem2.setText("Water");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        water.setText("Water");
+        water.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                waterActionPerformed(evt);
             }
         });
-        Colores.add(jMenuItem2);
+        Colores.add(water);
 
         Editar.add(Colores);
 
@@ -604,6 +605,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
             }
         });
         Editar.add(fecha);
+
+        mostrarNumLinea.setSelected(true);
+        mostrarNumLinea.setText("Numero de linea");
+        mostrarNumLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarNumLineaActionPerformed(evt);
+            }
+        });
+        Editar.add(mostrarNumLinea);
 
         MenuSuperior.add(Editar);
 
@@ -1164,15 +1174,15 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setForeground(Color.black);
     }//GEN-LAST:event_LightActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void natureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_natureActionPerformed
         // TODO add your handling code here:
         Color fondo =  new Color(192, 235, 221);
         Color letras =  new Color(1, 97, 66);
         notas.setBackground(fondo);
         notas.setForeground(letras);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_natureActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void waterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterActionPerformed
         // TODO add your handling code here:
         Color fondo =  new Color(186, 237, 245);
         Color letras =  new Color(0, 42, 252);
@@ -1180,7 +1190,18 @@ private void buscarpalabra(JTextArea notas, String texto) {
         notas.setForeground(letras);
                                     
         
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_waterActionPerformed
+
+    private void mostrarNumLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarNumLineaActionPerformed
+        // TODO add your handling code here:
+        if(mostrarNumLinea.isSelected()){
+                 numeroLinea = new TextLineNumber(notas);
+        scroll.setRowHeaderView(numeroLinea);
+        }else{
+        numeroLinea = new TextLineNumber(notas);
+        scroll.setRowHeaderView(null);
+        }
+    }//GEN-LAST:event_mostrarNumLineaActionPerformed
 
    
     /**
@@ -1262,13 +1283,14 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JRadioButtonMenuItem ing;
     private javax.swing.JMenuItem inkFree;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jokerman;
+    private javax.swing.JCheckBoxMenuItem mostrarNumLinea;
+    private javax.swing.JMenuItem nature;
     private javax.swing.JTextArea notas;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JSlider slider;
     private javax.swing.JMenuItem tahoma;
+    private javax.swing.JMenuItem water;
     // End of variables declaration//GEN-END:variables
    private java.util.GregorianCalendar fechaHora;
    boolean modificado = false;
