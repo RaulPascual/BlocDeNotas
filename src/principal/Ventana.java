@@ -5,7 +5,6 @@
  */
 package principal;
 
-
 import java.awt.AWTException;
 import java.awt.Button;
 import java.awt.Color;
@@ -53,7 +52,8 @@ import javax.swing.text.Highlighter;
  * @author Raul Pascual de la Calle
  */
 public class Ventana extends javax.swing.JFrame {
-      TextLineNumber numeroLinea;
+
+    TextLineNumber numeroLinea;
 
     /**
      * Creates new form Ventana
@@ -62,147 +62,134 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         numeroLinea = new TextLineNumber(notas);
         scroll.setRowHeaderView(numeroLinea);
-       ponerInfo();
-       try{
-        setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
-       }catch(Exception e){}
-       comprobaciones();
-        ponerTitulo();
-       
-       
-    }
-    
-  
-    private void ponerTitulo(){
-    this.setTitle("Nuevo documento");
-    }
-    
-
-    
-    private void comprobaciones(){
-      if(ajusteLinea.isSelected()){
-       notas.setLineWrap(true);
-       }else{
-       notas.setLineWrap(false);
-       }
-    
-    }
-        
-    private void ponerInfo(){
-      
-    notas.addCaretListener(new CaretListener() {
-        @Override
-        public void caretUpdate(CaretEvent e) {
-            int pos = e.getDot();
-                   try {
-                       if(esp.isSelected()){
-           int row = notas.getLineOfOffset( pos ) + 1;
-           int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
-           info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()) );
-       }else{
-            int    row = notas.getLineOfOffset( pos ) + 1;
-           int col = pos - notas.getLineStartOffset( row - 1 ) + 1;
-           info.setText("Line: " + row + " Column: " + col + " Number of words: " + contarPalabras(notas.getText()) );       
-                       }
-                   }
-                       
-       catch( BadLocationException exc ){
-           System.out.println(exc);
-       }
+        ponerInfo();
+        try {
+            setIconImage(new ImageIcon(getClass().getResource("../imagenes/icon.png")).getImage());
+        } catch (Exception e) {
         }
-    });
+        comprobaciones();
+        ponerTitulo();
+
     }
-    
-    private void abrirArchivo(){
+
+    private void ponerTitulo() {
+        this.setTitle("Nuevo documento");
+    }
+
+    private void comprobaciones() {
+        if (ajusteLinea.isSelected()) {
+            notas.setLineWrap(true);
+        } else {
+            notas.setLineWrap(false);
+        }
+
+    }
+
+    private void ponerInfo() {
+
+        notas.addCaretListener(new CaretListener() {
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                int pos = e.getDot();
+                try {
+                    if (esp.isSelected()) {
+                        int row = notas.getLineOfOffset(pos) + 1;
+                        int col = pos - notas.getLineStartOffset(row - 1) + 1;
+                        info.setText("Línea: " + row + " Columna: " + col + " Numero de palabras: " + contarPalabras(notas.getText()));
+                    } else {
+                        int row = notas.getLineOfOffset(pos) + 1;
+                        int col = pos - notas.getLineStartOffset(row - 1) + 1;
+                        info.setText("Line: " + row + " Column: " + col + " Number of words: " + contarPalabras(notas.getText()));
+                    }
+                } catch (BadLocationException exc) {
+                    System.out.println(exc);
+                }
+            }
+        });
+    }
+
+    private void abrirArchivo() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-          if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(null)) {
+        if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(null)) {
             File archivo = fileChooser.getSelectedFile();
-                FileReader lector = null;
-              try {
-                
-                
+            FileReader lector = null;
+            try {
+
                 lector = new FileReader(archivo);
                 BufferedReader bfReader = new BufferedReader(lector);
-                
-            String lineaFichero;
-            StringBuilder contenidoFichero = new StringBuilder();
-            this.setTitle(archivo.getName());
-            
-            // Recupera el contenido del fichero
-            while ((lineaFichero = bfReader.readLine()) != null) {
-                contenidoFichero.append(lineaFichero);
-                contenidoFichero.append("\n");
-            }
-            
-            notas.setText(contenidoFichero.toString());
-            modificado = false;
-             
-            
-            } catch (FileNotFoundException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-       
-            } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                lector.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-            
-           
-          }//fin if
-    
-    
-    }//fin del metodo
-    
-    
-    private File guardarArchivo(){
-        JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-    
-     if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
-        File archivo = fileChooser.getSelectedFile();
-        FileWriter escritor = null;
-        
-      
-            try {
-                
-                if(archivo.getName().contains(".")){
-                   escritor = new FileWriter(archivo); 
-                 escritor.write(notas.getText());
-                guardado = true;
-                }else{
-                    
-                   escritor = new FileWriter(archivo + ".txt");
-                 escritor.write(notas.getText());
-                guardado = true;
+
+                String lineaFichero;
+                StringBuilder contenidoFichero = new StringBuilder();
                 this.setTitle(archivo.getName());
+
+                // Recupera el contenido del fichero
+                while ((lineaFichero = bfReader.readLine()) != null) {
+                    contenidoFichero.append(lineaFichero);
+                    contenidoFichero.append("\n");
                 }
-             
-                 
+
+                notas.setText(contenidoFichero.toString());
+                modificado = false;
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+
             } catch (IOException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
+                try {
+                    lector.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }//fin if
+
+    }//fin del metodo
+
+    private File guardarArchivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
+            File archivo = fileChooser.getSelectedFile();
+            FileWriter escritor = null;
+
             try {
-                escritor.close();
+
+                if (archivo.getName().contains(".")) {
+                    escritor = new FileWriter(archivo);
+                    escritor.write(notas.getText());
+                    guardado = true;
+                } else {
+
+                    escritor = new FileWriter(archivo + ".txt");
+                    escritor.write(notas.getText());
+                    guardado = true;
+                    this.setTitle(archivo.getName());
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    escritor.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-           
-            }
-     
-     }else{ //opcion de cancelar al guardar el archvio
-      setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE); //Que no se cierre, por el evento windowClosing
-     
-     }
-    return fileChooser.getSelectedFile();
+
+        } else { //opcion de cancelar al guardar el archvio
+            setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE); //Que no se cierre, por el evento windowClosing
+
+        }
+        return fileChooser.getSelectedFile();
     } //fin del metodo
-    
-    
-        private String getFechaHoraESP(java.util.GregorianCalendar fechaHora) {
+
+    private String getFechaHoraESP(java.util.GregorianCalendar fechaHora) {
         String fecha = "";
         switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
             case java.util.Calendar.MONDAY:
@@ -230,8 +217,8 @@ public class Ventana extends javax.swing.JFrame {
         fecha = fecha + formatoFecha.format(fechaHora.getTime());
         return fecha;
     }//fin metodo fecha
-        
-         private String getFechaHoraING(java.util.GregorianCalendar fechaHora) {
+
+    private String getFechaHoraING(java.util.GregorianCalendar fechaHora) {
         String fecha = "";
         switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
             case java.util.Calendar.MONDAY:
@@ -259,48 +246,44 @@ public class Ventana extends javax.swing.JFrame {
         fecha = fecha + formatoFecha.format(fechaHora.getTime());
         return fecha;
     }//fin metodo fecha
-    
-         
-         private static int contarPalabras(String notas){
-         notas.trim();
-         int cont = 1;
-         int posicion;
-         if(notas.isEmpty()){
-         cont =0;
-         }else{
-        cont = notas.split("\\s+|\n|,").length;
-         }
-         
-         return cont;
-         }
-        
-   
 
-private void buscarpalabra(JTextArea notas, String texto) {
-     if(texto != null) {   
-    if (texto.length() >= 1) {
-            DefaultHighlighter.DefaultHighlightPainter subrayador = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
-            Highlighter h = notas.getHighlighter();
-            h.removeAllHighlights();
-            String text = notas.getText();
-            String caracteres = texto;
-            Pattern p = Pattern.compile("(?i)" + caracteres);
-            Matcher m = p.matcher(text);
-            if (m.find()) {
-                try {
-                    h.addHighlight(m.start(), m.end(), subrayador);
-                } catch (BadLocationException ex) {
-                   
-                }
-            }else{
-                JOptionPane.showMessageDialog(this, "No se ha enconrado esa palabra", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }else{
-             JOptionPane.showMessageDialog(this, "La palabra no puede estar vacía", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-     }
+    private static int contarPalabras(String notas) {
+        notas.trim();
+        int cont = 1;
+        int posicion;
+        if (notas.isEmpty()) {
+            cont = 0;
+        } else {
+            cont = notas.split("\\s+|\n|,").length;
+        }
+
+        return cont;
     }
-}
 
+    private void buscarpalabra(JTextArea notas, String texto) {
+        if (texto != null) {
+            if (texto.length() >= 1) {
+                DefaultHighlighter.DefaultHighlightPainter subrayador = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+                Highlighter h = notas.getHighlighter();
+                h.removeAllHighlights();
+                String text = notas.getText();
+                String caracteres = texto;
+                Pattern p = Pattern.compile("(?i)" + caracteres);
+                Matcher m = p.matcher(text);
+                if (m.find()) {
+                    try {
+                        h.addHighlight(m.start(), m.end(), subrayador);
+                    } catch (BadLocationException ex) {
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha enconrado esa palabra", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "La palabra no puede estar vacía", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -687,364 +670,346 @@ private void buscarpalabra(JTextArea notas, String texto) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-         // TODO add your handling code here:
-         guardarArchivo();
-        
-         
+        // TODO add your handling code here:
+        guardarArchivo();
+
+
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
-         // TODO add your handling code here:
-         notas.setText("");
-         ponerTitulo();
+        // TODO add your handling code here:
+        notas.setText("");
+        ponerTitulo();
     }//GEN-LAST:event_NuevoActionPerformed
 
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
-         // TODO add your handling code here:
-         
-         abrirArchivo();
+        // TODO add your handling code here:
+
+        abrirArchivo();
     }//GEN-LAST:event_AbrirActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-         // TODO add your handling code here
-         System.exit(0);
-         
+        // TODO add your handling code here
+        System.exit(0);
+
     }//GEN-LAST:event_SalirActionPerformed
 
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
-         // TODO add your handling code here:
-        
-        if(ajusteLinea.isSelected()){
-           
-        notas.setLineWrap(true);
-        }else{
-        notas.setLineWrap(false);
+        // TODO add your handling code here:
+
+        if (ajusteLinea.isSelected()) {
+
+            notas.setLineWrap(true);
+        } else {
+            notas.setLineWrap(false);
         }
     }//GEN-LAST:event_ajusteLineaActionPerformed
-    
+
     private void AcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcercaActionPerformed
-         // TODO add your handling code here:
-        if(esp.isSelected()){
+        // TODO add your handling code here:
+        if (esp.isSelected()) {
             JOptionPane menu = new JOptionPane();
-  
-    menu.showMessageDialog(this, "Aplicación creada por Raul Pascual de la Calle","Informacion", INFORMATION_MESSAGE);
-        }else{
-        JOptionPane.showMessageDialog(this, "Application made by Raul Pascual de la Calle", "Information", INFORMATION_MESSAGE);
+
+            menu.showMessageDialog(this, "Aplicación creada por Raul Pascual de la Calle", "Informacion", INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Application made by Raul Pascual de la Calle", "Information", INFORMATION_MESSAGE);
         }
 
-       
+
     }//GEN-LAST:event_AcercaActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-         // TODO add your handling code here:
-         
-        
+        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         // TODO add your handling code here:
-         
-         if(modificado == true && guardado == false){
-         int opciones = JOptionPane.showConfirmDialog(null, "¿Guardar el archivo?");  //0=si 1=no 2=cancelar
-          
-         if(opciones == 0){
-          guardarArchivo();
-         }else if(opciones == JOptionPane.CANCEL_OPTION){
-          setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE);
-         }else{
-         System.exit(0);
-         }
-         
-         }
-         
-       
+        // TODO add your handling code here:
+
+        if (modificado == true && guardado == false) {
+            int opciones = JOptionPane.showConfirmDialog(null, "¿Guardar el archivo?");  //0=si 1=no 2=cancelar
+
+            if (opciones == 0) {
+                guardarArchivo();
+            } else if (opciones == JOptionPane.CANCEL_OPTION) {
+                setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE);
+            } else {
+                System.exit(0);
+            }
+
+        }
+
+
     }//GEN-LAST:event_formWindowClosing
 
     private void notasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyTyped
         // TODO add your handling code here:
-        
+
         modificado = true;
-                 
+
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
-          // TODO add your handling code here:
-         infoTam.setText( "Tamaño de las letras: " + slider.getValue());
-         ponerInfo();
-        try{
-        popDerecho.setVisible(false);
-        }catch(Exception e){
-         Exception NullException;
+        // TODO add your handling code here:
+        infoTam.setText("Tamaño de las letras: " + slider.getValue());
+        ponerInfo();
+        try {
+            popDerecho.setVisible(false);
+        } catch (Exception e) {
+            Exception NullException;
         }
-       
-        contarPalabras(notas.getText());     
-     
+
+        contarPalabras(notas.getText());
+
     }//GEN-LAST:event_notasKeyPressed
 
-    
-    private void cortar(){
-                      try {
-        Robot robot = new Robot();
+    private void cortar() {
+        try {
+            Robot robot = new Robot();
 
-        // Simula la pulsacion de la tecla
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_X);
-       
+            // Simula la pulsacion de la tecla
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_X);
 
-         robot.keyRelease(KeyEvent.VK_X);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_X);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            popDerecho.setVisible(false);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void copiar() {
+        try {
+            Robot robot = new Robot();
+
+            // Simulate a key press
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_C);
+
+            robot.keyRelease(KeyEvent.VK_C);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
         popDerecho.setVisible(false);
-        } catch (AWTException e) {
-        e.printStackTrace();
-        }
-                      
-        
     }
-    
-    
-        private void copiar(){
-                      try {
-        Robot robot = new Robot();
 
-        // Simulate a key press
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_C);
-       
+    private void pegar() {
+        try {
+            Robot robot = new Robot();
 
-         robot.keyRelease(KeyEvent.VK_C);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
+            // Simulate a key press
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
         } catch (AWTException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
-            popDerecho.setVisible(false);
+        popDerecho.setVisible(false);
     }
-        
-        
-                private void pegar(){
-                      try {
-        Robot robot = new Robot();
 
-        // Simulate a key press
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-       
-
-         robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        } catch (AWTException e) {
-        e.printStackTrace();
-        }
-            popDerecho.setVisible(false);
-    }
-    
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
-         // TODO add your handling code here   
-         infoTam.setText( "Tamaño de las letras: " + slider.getValue());
-         if(evt.getClickCount() == 2 ){
-           Highlighter h = notas.getHighlighter();
+        // TODO add your handling code here   
+        infoTam.setText("Tamaño de las letras: " + slider.getValue());
+        if (evt.getClickCount() == 2) {
+            Highlighter h = notas.getHighlighter();
             h.removeAllHighlights();
-         }
-         
-
-        if(evt.getButton()==MouseEvent.BUTTON3){
-          
-           if(popDerecho != null){
-           popDerecho.setVisible(false);
-           }
-          popDerecho = new JPopupMenu();
-         copiarpop = new JMenuItem("Copiar");
-         pegarpop = new JMenuItem("Pegar");
-         cortarpop = new JMenuItem("Cortar");
-         popDerecho.add(copiarpop);
-         popDerecho.add(pegarpop);
-         popDerecho.add(cortarpop);
-     
-   
-      popDerecho.setLocation(evt.getLocationOnScreen());
-      popDerecho.setVisible(true);
-        
-      
-      //Al hacer clic en el boton de cortar
-      cortarpop.addMouseListener(new MouseListener() {
-              @Override
-              public void mouseClicked(MouseEvent me) {
-                  //metodo cortar
-                   cortar();
-              }
-
-              @Override
-              public void mousePressed(MouseEvent me) {
-                 //metodo cortar
-                 cortar();
-              }
-
-              @Override
-              public void mouseReleased(MouseEvent me) {
-                //metodo cortar
-                cortar();
-              }
-
-              @Override
-              public void mouseEntered(MouseEvent me) {
-                 //metodo cortar
-         
-              }
-
-              @Override
-              public void mouseExited(MouseEvent me) {
-                 //metodo cortar
-              }
-          });
-      
-      
-            //Al hacer clic en el boton de copiar
-           copiarpop.addMouseListener(new MouseListener() {
-              @Override
-              public void mouseClicked(MouseEvent me) {
-                  //metodo copiar
-                  copiar();
-              }
-
-              @Override
-              public void mousePressed(MouseEvent me) {
-                 //metodo copiar
-                 copiar();
-              }
-
-              @Override
-              public void mouseReleased(MouseEvent me) {
-                //metodo copiar
-                copiar();
-              }
-
-              @Override
-              public void mouseEntered(MouseEvent me) {
-               
-         
-              }
-
-              @Override
-              public void mouseExited(MouseEvent me) {
-                 
-              }
-          });
-      
-      
-           //Al hacer clic en el boton de pegar
-              pegarpop.addMouseListener(new MouseListener() {
-              @Override
-              public void mouseClicked(MouseEvent me) {
-                  //metodo pegar
-                  pegar();
-              }
-
-              @Override
-              public void mousePressed(MouseEvent me) {
-                 //metodo pegar
-                 pegar();
-              }
-
-              @Override
-              public void mouseReleased(MouseEvent me) {
-                //metodo pegar
-                pegar();
-              }
-
-              @Override
-              public void mouseEntered(MouseEvent me) {
-                 
-         
-              }
-
-              @Override
-              public void mouseExited(MouseEvent me) {
-                 
-              }
-          });
-           
-         if(popDerecho.isVisible() && evt.getButton() == MouseEvent.BUTTON1){
-         popDerecho.setVisible(false);
-         
-         }
-              
-              
-        }//fin del if del clic derecho
-        
-        
-        if(evt.getButton() == MouseEvent.BUTTON1){
-           try{
-            if(popDerecho.isVisible()){
-                   popDerecho.setVisible(false);
-            }
-               }catch(Exception e){
-                   System.out.println("No esta visible ahora");
-               
-           
-           }
-        
         }
-         
+
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+
+            if (popDerecho != null) {
+                popDerecho.setVisible(false);
+            }
+            popDerecho = new JPopupMenu();
+            copiarpop = new JMenuItem("Copiar");
+            pegarpop = new JMenuItem("Pegar");
+            cortarpop = new JMenuItem("Cortar");
+            popDerecho.add(copiarpop);
+            popDerecho.add(pegarpop);
+            popDerecho.add(cortarpop);
+
+            popDerecho.setLocation(evt.getLocationOnScreen());
+            popDerecho.setVisible(true);
+
+            //Al hacer clic en el boton de cortar
+            cortarpop.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    //metodo cortar
+                    cortar();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent me) {
+                    //metodo cortar
+                    cortar();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                    //metodo cortar
+                    cortar();
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent me) {
+                    //metodo cortar
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent me) {
+                    //metodo cortar
+                }
+            });
+
+            //Al hacer clic en el boton de copiar
+            copiarpop.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    //metodo copiar
+                    copiar();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent me) {
+                    //metodo copiar
+                    copiar();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                    //metodo copiar
+                    copiar();
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent me) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent me) {
+
+                }
+            });
+
+            //Al hacer clic en el boton de pegar
+            pegarpop.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    //metodo pegar
+                    pegar();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent me) {
+                    //metodo pegar
+                    pegar();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent me) {
+                    //metodo pegar
+                    pegar();
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent me) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent me) {
+
+                }
+            });
+
+            if (popDerecho.isVisible() && evt.getButton() == MouseEvent.BUTTON1) {
+                popDerecho.setVisible(false);
+
+            }
+
+        }//fin del if del clic derecho
+
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            try {
+                if (popDerecho.isVisible()) {
+                    popDerecho.setVisible(false);
+                }
+            } catch (Exception e) {
+                System.out.println("No esta visible ahora");
+            }
+
+        }
+
     }//GEN-LAST:event_notasMouseClicked
 
     private void espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espActionPerformed
         // TODO add your handling code here:
-          archivo.setText("Archivo");
-          Nuevo.setText("Nuevo");
-          Abrir.setText("Abrir");
-          Guardar.setText("Guardar");
-          imprimir.setText("Imprimir");
-          Salir.setText("Salir");
-          Acerca.setText("Acerca...");
-          
-          Editar.setText("Editar");
-          ColorFondo.setText("Color de fondo");
-          ColorLetras.setText("Color de las letras");
-          Colores.setText("Colores");
-          fuentes.setText("Fuentes");
-          buscar.setText("Buscar");
-          fecha.setText("Fecha y hora");
-          
-          mostrarNumLinea.setText("Numero de linea");
-          Formato.setText("Formato");
-          ajusteLinea.setText("Ajuste de linea");
-          
-          idioma.setText("Idioma");
-        
-        
+        archivo.setText("Archivo");
+        Nuevo.setText("Nuevo");
+        Abrir.setText("Abrir");
+        Guardar.setText("Guardar");
+        imprimir.setText("Imprimir");
+        Salir.setText("Salir");
+        Acerca.setText("Acerca...");
+
+        Editar.setText("Editar");
+        ColorFondo.setText("Color de fondo");
+        ColorLetras.setText("Color de las letras");
+        Colores.setText("Colores");
+        fuentes.setText("Fuentes");
+        buscar.setText("Buscar");
+        fecha.setText("Fecha y hora");
+
+        mostrarNumLinea.setText("Numero de linea");
+        Formato.setText("Formato");
+        ajusteLinea.setText("Ajuste de linea");
+
+        idioma.setText("Idioma");
+
+
     }//GEN-LAST:event_espActionPerformed
 
     private void ingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingActionPerformed
-         // TODO add your handling code here:
-          archivo.setText("File");
-          Nuevo.setText("New");
-          Abrir.setText("Open");
-          Guardar.setText("Save");
-          imprimir.setText("Print");
-          Salir.setText("Exit");
-          Acerca.setText("About...");
-          
-          Editar.setText("Edit");
-          ColorFondo.setText("Background Color");
-          ColorLetras.setText("Word Color");
-          fuentes.setText("Fonts");
-          buscar.setText("Find");
-          mostrarNumLinea.setText("Line number");
-          fecha.setText("Date and hour");
-          Colores.setText("Themes");
-          Formato.setText("Format");
-          ajusteLinea.setText("Word wrap");
-          
-          idioma.setText("Language");
+        // TODO add your handling code here:
+        archivo.setText("File");
+        Nuevo.setText("New");
+        Abrir.setText("Open");
+        Guardar.setText("Save");
+        imprimir.setText("Print");
+        Salir.setText("Exit");
+        Acerca.setText("About...");
 
-     
+        Editar.setText("Edit");
+        ColorFondo.setText("Background Color");
+        ColorLetras.setText("Word Color");
+        fuentes.setText("Fonts");
+        buscar.setText("Find");
+        mostrarNumLinea.setText("Line number");
+        fecha.setText("Date and hour");
+        Colores.setText("Themes");
+        Formato.setText("Format");
+        ajusteLinea.setText("Word wrap");
+
+        idioma.setText("Language");
+
+
     }//GEN-LAST:event_ingActionPerformed
 
     private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
         // TODO add your handling code here:
         fechaHora = new java.util.GregorianCalendar();
-        if(esp.isSelected()){
+        if (esp.isSelected()) {
             notas.setText(notas.getText() + getFechaHoraESP(fechaHora));
-        }else{
+        } else {
             notas.setText(notas.getText() + getFechaHoraING(fechaHora));
         }
 
@@ -1053,24 +1018,23 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
 
-        try{
-            if(esp.isSelected()){
-              String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
+        try {
+            if (esp.isSelected()) {
+                String palabra = JOptionPane.showInputDialog(this, "Palabra a buscar");
 
-            buscarpalabra(notas, palabra);
-            }else{
-              String palabra = JOptionPane.showInputDialog(this, "Search word");
-            buscarpalabra(notas, palabra);
+                buscarpalabra(notas, palabra);
+            } else {
+                String palabra = JOptionPane.showInputDialog(this, "Search word");
+                buscarpalabra(notas, palabra);
             }
-          
-        }catch(NullPointerException ex){
+
+        } catch (NullPointerException ex) {
             Exception NullException;
         }
 
     }//GEN-LAST:event_buscarActionPerformed
 
 
-    
     private void inkFreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inkFreeActionPerformed
         // TODO add your handling code here:
         Font fuente = new Font("Ink Free", 3, 20);
@@ -1112,8 +1076,8 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void ColorLetrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorLetrasActionPerformed
         // TODO add your handling code here:
 
-        Color initialcolor=Color.WHITE;
-        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);
+        Color initialcolor = Color.WHITE;
+        Color color = JColorChooser.showDialog(this, "Selecciona un color", initialcolor);
         notas.setForeground(color);
 
     }//GEN-LAST:event_ColorLetrasActionPerformed
@@ -1121,48 +1085,48 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private void ColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorFondoActionPerformed
         // TODO add your handling code here:
 
-        Color initialcolor=Color.BLACK;
-        Color color=JColorChooser.showDialog(this,"Selecciona un color",initialcolor);
+        Color initialcolor = Color.BLACK;
+        Color color = JColorChooser.showDialog(this, "Selecciona un color", initialcolor);
         notas.setBackground(color);
 
     }//GEN-LAST:event_ColorFondoActionPerformed
 
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
         // TODO add your handling code here:
-        try{
-        if(popDerecho.isVisible()){
-        popDerecho.setVisible(false);
-        }
-        }catch(Exception e){
+        try {
+            if (popDerecho.isVisible()) {
+                popDerecho.setVisible(false);
+            }
+        } catch (Exception e) {
             System.out.println("No esta visible");
         }
-        
+
     }//GEN-LAST:event_formWindowDeactivated
 
     private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
-           // TODO add your handling code here:
-         int tamaño = slider.getValue();
-         Font fuente = new Font(notas.getFont().getFamily(), Font.PLAIN, tamaño);
-         notas.setFont(fuente);
-         this.infoTam.setText( "Tamaño de las letras: " + slider.getValue());
+        // TODO add your handling code here:
+        int tamaño = slider.getValue();
+        Font fuente = new Font(notas.getFont().getFamily(), Font.PLAIN, tamaño);
+        notas.setFont(fuente);
+        this.infoTam.setText("Tamaño de las letras: " + slider.getValue());
     }//GEN-LAST:event_sliderStateChanged
 
     private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
         // TODO add your handling code here:
-                texto = "";
-                texto = notas.getText();
-                
-                if (!texto.equals("")){
-		imp = new Impresora();
-		imp.imprimir(texto);
-		}else{
-                    JOptionPane.showMessageDialog(this, "El documento esta vacío");
-		System.out.println("NO SE IMPRIME NADA EN BLANCO...");
- 
-		notas.requestFocus();
-		notas.select(0, texto.length());
-			}
-        
+        texto = "";
+        texto = notas.getText();
+
+        if (!texto.equals("")) {
+            imp = new Impresora();
+            imp.imprimir(texto);
+        } else {
+            JOptionPane.showMessageDialog(this, "El documento esta vacío");
+            System.out.println("NO SE IMPRIME NADA EN BLANCO...");
+
+            notas.requestFocus();
+            notas.select(0, texto.length());
+        }
+
     }//GEN-LAST:event_imprimirActionPerformed
 
     private void DarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarkActionPerformed
@@ -1179,39 +1143,38 @@ private void buscarpalabra(JTextArea notas, String texto) {
 
     private void natureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_natureActionPerformed
         // TODO add your handling code here:
-        Color fondo =  new Color(192, 235, 221);
-        Color letras =  new Color(1, 97, 66);
+        Color fondo = new Color(192, 235, 221);
+        Color letras = new Color(1, 97, 66);
         notas.setBackground(fondo);
         notas.setForeground(letras);
     }//GEN-LAST:event_natureActionPerformed
 
     private void waterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterActionPerformed
         // TODO add your handling code here:
-        Color fondo =  new Color(186, 237, 245);
-        Color letras =  new Color(0, 42, 252);
+        Color fondo = new Color(186, 237, 245);
+        Color letras = new Color(0, 42, 252);
         notas.setBackground(fondo);
         notas.setForeground(letras);
-                                    
-        
+
+
     }//GEN-LAST:event_waterActionPerformed
 
     private void mostrarNumLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarNumLineaActionPerformed
         // TODO add your handling code here:
-        if(mostrarNumLinea.isSelected()){
-                 numeroLinea = new TextLineNumber(notas);
-        scroll.setRowHeaderView(numeroLinea);
-        }else{
-        numeroLinea = new TextLineNumber(notas);
-        scroll.setRowHeaderView(null);
+        if (mostrarNumLinea.isSelected()) {
+            numeroLinea = new TextLineNumber(notas);
+            scroll.setRowHeaderView(numeroLinea);
+        } else {
+            numeroLinea = new TextLineNumber(notas);
+            scroll.setRowHeaderView(null);
         }
     }//GEN-LAST:event_mostrarNumLineaActionPerformed
 
-   
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1250,7 +1213,7 @@ private void buscarpalabra(JTextArea notas, String texto) {
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
     }
@@ -1296,12 +1259,12 @@ private void buscarpalabra(JTextArea notas, String texto) {
     private javax.swing.JMenuItem water;
     // End of variables declaration//GEN-END:variables
    private java.util.GregorianCalendar fechaHora;
-   boolean modificado = false;
-   boolean guardado = false;
-   private JComboBox size;
-   private JPopupMenu popDerecho;
-   private JMenuItem cortarpop,copiarpop,pegarpop;
-   private String texto;
-   Impresora imp;
-   Font f;
+    boolean modificado = false;
+    boolean guardado = false;
+    private JComboBox size;
+    private JPopupMenu popDerecho;
+    private JMenuItem cortarpop, copiarpop, pegarpop;
+    private String texto;
+    Impresora imp;
+    Font f;
 }
