@@ -6,6 +6,7 @@
 package principal;
 
 import funciones.AbrirArchivo;
+import funciones.GuardarArchivo;
 import funciones.clickDerecho;
 import funciones.getFecha;
 import java.awt.AWTException;
@@ -109,46 +110,9 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private File guardarArchivo() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-        if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
-            File archivo = fileChooser.getSelectedFile();
-            FileWriter escritor = null;
-
-            try {
-
-                if (archivo.getName().contains(".")) {
-                    escritor = new FileWriter(archivo);
-                    escritor.write(notas.getText());
-                    guardado = true;
-                } else {
-
-                    escritor = new FileWriter(archivo + ".txt");
-                    escritor.write(notas.getText());
-                    guardado = true;
-                    this.setTitle(archivo.getName());
-                }
-
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    escritor.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
-        } else { //opcion de cancelar al guardar el archvio
-            setDefaultCloseOperation(Ventana.DO_NOTHING_ON_CLOSE); //Que no se cierre, por el evento windowClosing
-
-        }
-        return fileChooser.getSelectedFile();
+        GuardarArchivo guardar = new GuardarArchivo();
+        return guardar.guardar(guardado, notas, this);
     } 
-
-
 
     private static int contarPalabras(String notas) {
         notas.trim();
@@ -1140,5 +1104,5 @@ public class Ventana extends javax.swing.JFrame {
     private JMenuItem cortarpop, copiarpop, pegarpop;
     private String texto;
     Impresora imp;
-    Font f;
+    Font fuente;
 }
