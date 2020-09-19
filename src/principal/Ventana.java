@@ -5,6 +5,7 @@
  */
 package principal;
 
+import funciones.getFecha;
 import java.awt.AWTException;
 import java.awt.Button;
 import java.awt.Color;
@@ -187,65 +188,9 @@ public class Ventana extends javax.swing.JFrame {
 
         }
         return fileChooser.getSelectedFile();
-    } //fin del metodo
+    } 
 
-    private String getFechaHoraESP(java.util.GregorianCalendar fechaHora) {
-        String fecha = "";
-        switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
-            case java.util.Calendar.MONDAY:
-                fecha = "Lunes, ";
-                break;
-            case java.util.Calendar.TUESDAY:
-                fecha = "Martes, ";
-                break;
-            case java.util.Calendar.WEDNESDAY:
-                fecha = "Miércoles, ";
-                break;
-            case java.util.Calendar.THURSDAY:
-                fecha = "Jueves, ";
-                break;
-            case java.util.Calendar.FRIDAY:
-                fecha = "Viernes, ";
-                break;
-            case java.util.Calendar.SATURDAY:
-                fecha = "Sabado, ";
-                break;
-            case java.util.Calendar.SUNDAY:
-                fecha = "Domingo, ";
-        }
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        fecha = fecha + formatoFecha.format(fechaHora.getTime());
-        return fecha;
-    }//fin metodo fecha
 
-    private String getFechaHoraING(java.util.GregorianCalendar fechaHora) {
-        String fecha = "";
-        switch (fechaHora.get(java.util.Calendar.DAY_OF_WEEK)) {
-            case java.util.Calendar.MONDAY:
-                fecha = "Monday, ";
-                break;
-            case java.util.Calendar.TUESDAY:
-                fecha = "Tuesday, ";
-                break;
-            case java.util.Calendar.WEDNESDAY:
-                fecha = "Wednesday, ";
-                break;
-            case java.util.Calendar.THURSDAY:
-                fecha = "Thursday, ";
-                break;
-            case java.util.Calendar.FRIDAY:
-                fecha = "Friday, ";
-                break;
-            case java.util.Calendar.SATURDAY:
-                fecha = "Saturday, ";
-                break;
-            case java.util.Calendar.SUNDAY:
-                fecha = "Sunday, ";
-        }
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        fecha = fecha + formatoFecha.format(fechaHora.getTime());
-        return fecha;
-    }//fin metodo fecha
 
     private static int contarPalabras(String notas) {
         notas.trim();
@@ -1007,10 +952,14 @@ public class Ventana extends javax.swing.JFrame {
     private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
         // TODO add your handling code here:
         fechaHora = new java.util.GregorianCalendar();
+        getFecha getFecha = new getFecha();
         if (esp.isSelected()) {
-            notas.setText(notas.getText() + getFechaHoraESP(fechaHora));
+            
+            String getFechaESP = getFecha.getFechaHoraESP(fechaHora);
+            notas.setText(notas.getText() + getFechaESP);
         } else {
-            notas.setText(notas.getText() + getFechaHoraING(fechaHora));
+            String getFechaING = getFecha.getFechaHoraING(fechaHora);
+            notas.setText(notas.getText() + getFechaING);
         }
 
     }//GEN-LAST:event_fechaActionPerformed
