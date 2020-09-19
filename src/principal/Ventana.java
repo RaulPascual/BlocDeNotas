@@ -5,15 +5,13 @@
  */
 package principal;
 
+import funciones.AbrirArchivo;
+import funciones.clickDerecho;
 import funciones.getFecha;
 import java.awt.AWTException;
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.Robot;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,9 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -34,7 +29,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -110,45 +104,9 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void abrirArchivo() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(null)) {
-            File archivo = fileChooser.getSelectedFile();
-            FileReader lector = null;
-            try {
-
-                lector = new FileReader(archivo);
-                BufferedReader bfReader = new BufferedReader(lector);
-
-                String lineaFichero;
-                StringBuilder contenidoFichero = new StringBuilder();
-                this.setTitle(archivo.getName());
-
-                // Recupera el contenido del fichero
-                while ((lineaFichero = bfReader.readLine()) != null) {
-                    contenidoFichero.append(lineaFichero);
-                    contenidoFichero.append("\n");
-                }
-
-                notas.setText(contenidoFichero.toString());
-                modificado = false;
-
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    lector.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }//fin if
-
-    }//fin del metodo
+        AbrirArchivo abrir = new AbrirArchivo();
+        abrir.Abrir(modificado, notas, this);
+    }
 
     private File guardarArchivo() {
         JFileChooser fileChooser = new JFileChooser();
@@ -710,52 +668,19 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_notasKeyPressed
 
     private void cortar() {
-        try {
-            Robot robot = new Robot();
-
-            // Simula la pulsacion de la tecla
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_X);
-
-            robot.keyRelease(KeyEvent.VK_X);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            popDerecho.setVisible(false);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+      clickDerecho cortar = new clickDerecho();
+      cortar.cortar(popDerecho);
 
     }
 
     private void copiar() {
-        try {
-            Robot robot = new Robot();
-
-            // Simulate a key press
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_C);
-
-            robot.keyRelease(KeyEvent.VK_C);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
-        popDerecho.setVisible(false);
+      clickDerecho copiar = new clickDerecho();
+      copiar.copiar(popDerecho); 
     }
 
     private void pegar() {
-        try {
-            Robot robot = new Robot();
-
-            // Simulate a key press
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
-        popDerecho.setVisible(false);
+  clickDerecho pegar = new clickDerecho();
+      pegar.pegar(popDerecho); 
     }
 
     private void notasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notasMouseClicked
