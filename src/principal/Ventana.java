@@ -9,19 +9,11 @@ import funciones.AbrirArchivo;
 import funciones.GuardarArchivo;
 import funciones.clickDerecho;
 import funciones.getFecha;
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -29,7 +21,6 @@ import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -612,9 +603,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void notasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyTyped
         // TODO add your handling code here:
-
         modificado = true;
-
     }//GEN-LAST:event_notasKeyTyped
 
     private void notasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_notasKeyPressed
@@ -626,15 +615,12 @@ public class Ventana extends javax.swing.JFrame {
         } catch (Exception e) {
             Exception NullException;
         }
-
         contarPalabras(notas.getText());
-
     }//GEN-LAST:event_notasKeyPressed
 
     private void cortar() {
       clickDerecho cortar = new clickDerecho();
       cortar.cortar(popDerecho);
-
     }
 
     private void copiar() {
@@ -778,7 +764,7 @@ public class Ventana extends javax.swing.JFrame {
                     popDerecho.setVisible(false);
                 }
             } catch (Exception e) {
-                System.out.println("No esta visible ahora");
+               // System.out.println("No esta visible ahora");
             }
 
         }
@@ -936,7 +922,7 @@ public class Ventana extends javax.swing.JFrame {
                 popDerecho.setVisible(false);
             }
         } catch (Exception e) {
-            System.out.println("No esta visible");
+          //  System.out.println("No esta visible");
         }
 
     }//GEN-LAST:event_formWindowDeactivated
@@ -959,7 +945,7 @@ public class Ventana extends javax.swing.JFrame {
             imp.imprimir(texto);
         } else {
             JOptionPane.showMessageDialog(this, "El documento esta vacío");
-            System.out.println("NO SE IMPRIME NADA EN BLANCO...");
+           // System.out.println("NO SE IMPRIME NADA EN BLANCO...");
 
             notas.requestFocus();
             notas.select(0, texto.length());

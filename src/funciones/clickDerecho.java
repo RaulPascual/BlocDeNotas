@@ -8,6 +8,7 @@ package funciones;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
@@ -63,4 +64,6 @@ public class clickDerecho {
         }
         popDerecho.setVisible(false);
     }
+
+
 }
