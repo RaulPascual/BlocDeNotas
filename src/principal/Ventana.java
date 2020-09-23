@@ -225,6 +225,7 @@ public class Ventana extends javax.swing.JFrame {
         scroll.setViewportView(notas);
 
         info.setBackground(new java.awt.Color(102, 102, 102));
+        info.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         slider.setMajorTickSpacing(10);
@@ -241,6 +242,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        infoTam.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         infoTam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setText("jLabel1");
@@ -250,9 +252,9 @@ public class Ventana extends javax.swing.JFrame {
         MenuSuperior.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         archivo.setText("Archivo");
-        archivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        archivo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Nuevo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Nuevo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Nuevo.setText("Nuevo");
         Nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +264,7 @@ public class Ventana extends javax.swing.JFrame {
         archivo.add(Nuevo);
 
         Abrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        Abrir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Abrir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Abrir.setText("Abrir");
         Abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +274,7 @@ public class Ventana extends javax.swing.JFrame {
         archivo.add(Abrir);
 
         Guardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        Guardar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Guardar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,7 +284,7 @@ public class Ventana extends javax.swing.JFrame {
         archivo.add(Guardar);
 
         imprimir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        imprimir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imprimir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         imprimir.setText("Imprimir");
         imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +293,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         archivo.add(imprimir);
 
-        Salir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Salir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +302,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         archivo.add(Salir);
 
-        Acerca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Acerca.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Acerca.setText("Acerca de...");
         Acerca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,9 +314,9 @@ public class Ventana extends javax.swing.JFrame {
         MenuSuperior.add(archivo);
 
         Editar.setText("Editar");
-        Editar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Editar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        ColorFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ColorFondo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ColorFondo.setText("Color de fondo");
         ColorFondo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +325,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Editar.add(ColorFondo);
 
-        ColorLetras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ColorLetras.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ColorLetras.setText("Color de las letras");
         ColorLetras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,8 +335,9 @@ public class Ventana extends javax.swing.JFrame {
         Editar.add(ColorLetras);
 
         Colores.setText("Temas de color");
-        Colores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Colores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
+        Dark.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Dark.setText("Dark");
         Dark.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,6 +346,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Colores.add(Dark);
 
+        Light.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Light.setText("Light");
         Light.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,6 +355,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Colores.add(Light);
 
+        nature.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         nature.setText("Nature");
         nature.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,6 +364,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Colores.add(nature);
 
+        water.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         water.setText("Water");
         water.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -370,9 +376,9 @@ public class Ventana extends javax.swing.JFrame {
         Editar.add(Colores);
 
         fuentes.setText("Fuentes");
-        fuentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fuentes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Arial.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        Arial.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         Arial.setText("Arial");
         Arial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +387,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         fuentes.add(Arial);
 
-        Impact.setFont(new java.awt.Font("Impact", 0, 15)); // NOI18N
+        Impact.setFont(new java.awt.Font("Impact", 0, 16)); // NOI18N
         Impact.setText("Impact");
         Impact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,7 +396,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         fuentes.add(Impact);
 
-        tahoma.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        tahoma.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tahoma.setText("Tahoma");
         tahoma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,7 +405,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         fuentes.add(tahoma);
 
-        georgia.setFont(new java.awt.Font("Georgia", 0, 15)); // NOI18N
+        georgia.setFont(new java.awt.Font("Georgia", 0, 16)); // NOI18N
         georgia.setText("Georgia");
         georgia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,7 +414,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         fuentes.add(georgia);
 
-        jokerman.setFont(new java.awt.Font("Jokerman", 0, 15)); // NOI18N
+        jokerman.setFont(new java.awt.Font("Jokerman", 0, 16)); // NOI18N
         jokerman.setText("Jokerman");
         jokerman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,7 +423,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         fuentes.add(jokerman);
 
-        inkFree.setFont(new java.awt.Font("Ink Free", 0, 15)); // NOI18N
+        inkFree.setFont(new java.awt.Font("Ink Free", 0, 16)); // NOI18N
         inkFree.setText("Ink Free");
         inkFree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,7 +435,7 @@ public class Ventana extends javax.swing.JFrame {
         Editar.add(fuentes);
 
         buscar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        buscar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,7 +444,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Editar.add(buscar);
 
-        fecha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fecha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         fecha.setText("Fecha y hora");
         fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,9 +456,9 @@ public class Ventana extends javax.swing.JFrame {
         MenuSuperior.add(Editar);
 
         Formato.setText("Formato");
-        Formato.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Formato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        ajusteLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ajusteLinea.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         ajusteLinea.setSelected(true);
         ajusteLinea.setText("Ajuste de Linea");
         ajusteLinea.addActionListener(new java.awt.event.ActionListener() {
@@ -462,7 +468,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         Formato.add(ajusteLinea);
 
-        mostrarNumLinea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mostrarNumLinea.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         mostrarNumLinea.setSelected(true);
         mostrarNumLinea.setText("Numero de linea");
         mostrarNumLinea.addActionListener(new java.awt.event.ActionListener() {
@@ -475,7 +481,7 @@ public class Ventana extends javax.swing.JFrame {
         MenuSuperior.add(Formato);
 
         idioma.setText("Idioma");
-        idioma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        idioma.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         idioma_btnGroup.add(esp);
         esp.setSelected(true);
@@ -509,14 +515,14 @@ public class Ventana extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(208, 208, 208))
+                .addComponent(infoTam, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132))
             .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,7 +585,7 @@ public class Ventana extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
 
-
+        
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -587,7 +593,7 @@ public class Ventana extends javax.swing.JFrame {
 
         if (modificado == true && guardado == false) {
             int opciones = JOptionPane.showConfirmDialog(null, "¿Guardar el archivo?");  //0=si 1=no 2=cancelar
-
+            
             if (opciones == 0) {
                 guardarArchivo();
             } else if (opciones == JOptionPane.CANCEL_OPTION) {
